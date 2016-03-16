@@ -58,7 +58,7 @@
 
 	'use strict';
 
-	alert('test');
+	document.write('hellobitchtinoqweqweasdasd');
 
 /***/ }
 /******/ ]);
