@@ -1,1 +1,1 @@
-document.write('hellobitchtinoqweqweasdasd')
+alert('hello')

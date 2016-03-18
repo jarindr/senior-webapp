@@ -1,1 +1,2 @@
-import test from '../../public/javascripts/graph.js'
+import test from './graph.js'
+document.write('hello my shit omg damn fast as fuck')
