@@ -5,5 +5,8 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Chulalongkorn data center' });
 });
+router.get('/graph', function(req, res, next) {
+  res.render('graph')
+});
 
 module.exports = router;
