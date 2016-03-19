@@ -46,10 +46,21 @@
 
 	'use strict';
 
-	__webpack_require__(1);
+	var _jquery = __webpack_require__(1);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
 
 	__webpack_require__(5);
 
+<<<<<<< HEAD
+	__webpack_require__(14);
+
+	__webpack_require__(15);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+=======
+>>>>>>> origin/master
 /***/ },
 /* 1 */
 /***/ function(module, exports, __webpack_require__) {
@@ -12660,5 +12671,29 @@
 	}
 
 
+<<<<<<< HEAD
+/***/ },
+/* 14 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	console.log('hi this is me jarindr thitadilaka');
+
+/***/ },
+/* 15 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function($) {'use strict';
+
+	$(document).ready(function () {
+	  $('#login').click(function () {
+	    $('.vc-child').load('signin');
+	  });
+	});
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+
+=======
+>>>>>>> origin/master
 /***/ }
 /******/ ]);

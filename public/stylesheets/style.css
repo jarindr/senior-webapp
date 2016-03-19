@@ -1,3 +1,45 @@
-.main-page {
-  background-color: blue;
+/*helper*/
+.clear-padding {
+  padding: 0 !important;
+}
+.margin-auto {
+  margin: 0 auto;
+}
+/*landing page*/
+#main-logo {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.centered {
+  text-align: center;
+}
+.vc-child{
+  position: absolute;
+  top: 45%;
+  width: 100%;
+  transform: translateY(-50%);
+  margin: 0 auto;
+}
+.signin-form {
+  margin-top: 2rem;
+}
+
+/*navbar*/
+.left-nav {
+  height: 100%;
+  background-color: #300018;
+  color: white;
+}
+.left-nav>ul{
+  list-style-type: none;
+  padding: 0;
+}
+
+/*main*/
+.pragiew {
+  margin: 1.5em 0;
+}
+.excerp-content{
+  background-color: #D35A95;
+  text-align: center;
 }
