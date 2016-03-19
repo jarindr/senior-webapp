@@ -46,13 +46,23 @@
 
 	'use strict';
 
-	__webpack_require__(1);
+	var _jquery = __webpack_require__(1);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
 
 	__webpack_require__(3);
 
 	__webpack_require__(5);
 
 	__webpack_require__(14);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	(0, _jquery2.default)(document).ready(function () {
+	  (0, _jquery2.default)('#login').click(function () {
+	    (0, _jquery2.default)('.vc-child').load('signin');
+	  });
+	});
 
 /***/ },
 /* 1 */
