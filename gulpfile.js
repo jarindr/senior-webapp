@@ -14,7 +14,7 @@ gulp.task('nodemon',['webpack'],function (cb) {
   return nodemon({
     // nodemon our expressjs server
     script: './bin/www',
-    watch: ['./routes/','./app','./bin/www'],
+    watch: ['./routes/','./app','./bin/www','./database/'],
     // watch core server file(s) that require server restart on change
   })
     .on('start', function onStart() {
@@ -33,13 +33,12 @@ gulp.task('nodemon',['webpack'],function (cb) {
 });
 
 gulp.task('browser-sync', ['webpack','nodemon'], function (cb) {
-  // for more browser-sync config options: http://www.browsersync.io/docs/options/
-  browserSync.init({
-    proxy: 'http://localhost:3000',
-    port: 4000,
-
-
-  },cb)
+  setTimeout(function () { // delay waiting for mongo connection
+    browserSync.init({
+      proxy: 'http://localhost:3000',
+      port: 4000,
+    },cb)
+  }, BROWSER_SYNC_RELOAD_DELAY)
 });
 
 gulp.task('webpack',function () {
