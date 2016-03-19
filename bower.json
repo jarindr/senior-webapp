@@ -1,0 +1,23 @@
+{
+  "name": "bower.json",
+  "description": "this is dependencies for bower",
+  "main": "",
+  "authors": [
+    "jarindr <jarindr23@hotmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/jarindr/senior-webapp",
+  "moduleType": [],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^2.2.2",
+    "bootstrap": "^3.3.6"
+  }
+}

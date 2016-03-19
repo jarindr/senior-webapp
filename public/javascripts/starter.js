@@ -1,2 +1,7 @@
-import test from './graph.js'
-document.write('hello my shit omg damn fast as fuck')
+
+import 'jquery'
+
+import 'bootstrap'
+import '../../bower_components/bootstrap/dist/css/bootstrap.css'
+
+import '../javascripts/graph.js'

@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'wow it damn it jarindr so fast' });
+  res.render('index', { title: 'Chulalongkorn data center' });
 });
 
 module.exports = router;

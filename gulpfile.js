@@ -9,13 +9,12 @@ var webpack = require('webpack-stream');
 // connected to browser-sync after restarting nodemon
 var BROWSER_SYNC_RELOAD_DELAY = 500;
 
-gulp.task('nodemon', function (cb) {
+gulp.task('nodemon',['webpack'],function (cb) {
   var called = false;
   return nodemon({
     // nodemon our expressjs server
     script: './bin/www',
-    watch: './routes/',
-    tasks: ['webpack']
+    watch: ['./routes/','./app','./bin/www'],
     // watch core server file(s) that require server restart on change
   })
     .on('start', function onStart() {
@@ -46,13 +45,17 @@ gulp.task('browser-sync', ['webpack','nodemon'], function (cb) {
 gulp.task('webpack',function () {
   return gulp.src('./public/javascripts/starter.js')
   .pipe(webpack( require('./webpack.config.js') ))
-  .pipe(gulp.dest('dist/'))
+  .pipe(gulp.dest('./build'))
 
 })
-gulp.task('bs-reload',['webpack'],function () {
+gulp.task('bs-reload-webpack',['webpack'],function () {
   browserSync.reload()
 })
-gulp.task('default', ['browser-sync'], function () {
+gulp.task('bs-reload',function () {
+  browserSync.reload()
+})
+gulp.task('dev', ['browser-sync'], function () {
   gulp.watch('./views/**', ['bs-reload'])
-  gulp.watch('./public/javascripts/**', ['webpack','bs-reload'])
+  gulp.watch('./public/javascripts/**', ['webpack','bs-reload-webpack'])
+  gulp.watch('./public/stylesheets/**',['bs-reload'])
 });

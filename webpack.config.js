@@ -1,9 +1,12 @@
+'use strict'
+const webpack = require('webpack')
+const BowerWebpackPlugin = require("bower-webpack-plugin")
+const ExtractTextPlugin = require("extract-text-webpack-plugin")
 
 module.exports = {
-  entry: "./public/javascripts/starter.js",
   output: {
-    path: __dirname + '/dist',
-    filename: "bundle.js"
+    path: __dirname + '/build',
+    filename: "js/bundle.js"
   },
   module: {
     loaders: [
@@ -14,7 +17,29 @@ module.exports = {
         query: {
           presets: ['es2015'],
         },
+      },
+      {
+        test: /\.css$/,
+        loader: 'style!css'
+      },
+      {
+        test: /\.(woff|svg|ttf|eot)([\?]?.*)$/,
+        loader: "file-loader?name=[name].[ext]"
       }
     ]
-  }
+  },
+  plugins: [
+    new webpack.ProvidePlugin({
+      $: "jquery",
+      jQuery: "jquery",
+
+    }),
+    new BowerWebpackPlugin({
+      modulesDirectories: ["bower_components"],
+      manifestFiles:      "./bower.json",
+      includes:           /.*/,
+      excludes:           /.*\.less/,
+      searchResolveModulesDirectories: true
+    })
+  ]
 };
