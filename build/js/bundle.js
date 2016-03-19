@@ -56,13 +56,9 @@
 
 	__webpack_require__(14);
 
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	__webpack_require__(15);
 
-	(0, _jquery2.default)(document).ready(function () {
-	  (0, _jquery2.default)('#login').click(function () {
-	    (0, _jquery2.default)('.vc-child').load('signin');
-	  });
-	});
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ },
 /* 1 */
@@ -12681,6 +12677,19 @@
 	'use strict';
 
 	console.log('hi this is me jarindr thitadilaka');
+
+/***/ },
+/* 15 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function($) {'use strict';
+
+	$(document).ready(function () {
+	  $('#login').click(function () {
+	    $('.vc-child').load('signin');
+	  });
+	});
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }
 /******/ ]);
