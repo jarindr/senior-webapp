@@ -5,13 +5,20 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Chulalongkorn data center' })
 });
+
+
 router.post('/signin', function(req, res, next){
-  console.log(req.body.username)
   res.redirect('main')
 })
 router.get('/signin', function(req, res, next){
+  res.render('index')
+})
+
+
+router.get('/signin-form', function(req, res, next){
   res.render('signin')
 })
+
 router.get('/graph', function(req, res, next) {
   res.render('graph')
 });

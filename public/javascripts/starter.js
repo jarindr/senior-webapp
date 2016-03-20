@@ -1,6 +1,4 @@
-import 'bootstrap'
-import '../../bower_components/bootstrap-material-design/js/src/ripples.js'
-import '../../bower_components/bootstrap/dist/css/bootstrap.css'
-import '../../bower_components/bootstrap-material-design/dist/bootstrap-material-design.min.css'
+
+import '../../bower_components/materialize/dist/js/materialize.js'
 import '../javascripts/graph.js'
 import '../javascripts/login.js'

@@ -2,18 +2,23 @@
 <html>
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" type="text/css" href="./bower_components/materialize/dist/css/materialize.min.css" />
   <link rel="stylesheet" type="text/css" href="./public/stylesheets/style.css" />
-  <script type="text/javascript" src="./build/js/bundle.js" charset="utf-8"></script>
 </head>
 <body>
-    <div class = "vc-child">
-        <div class="col-lg-8 col-lg-offset-2" id="main-logo">
-          <h1>CU Information Center</h1>
-        </div>
-        <div class="col-lg-6 col-lg-offset-3 centered">
-          <button class="btn" id="login">Login</button>
-          <button class="btn">Enter as Guest</button>
-        </div>
+
+  <div class = "vc-child">
+    <div id="main-logo">
+      <h1>CU Information Center</h1>
     </div>
+    <div id='login-form'>
+    </div>
+    <div class="centered">
+      <button class="waves-effect waves-light btn pink lighten-1" id="login">Login Chula User</button>
+      <button class="waves-effect waves-light btn pink lighten-1">Enter as Guest</button>
+    </div>
+  </div>
+  <script type="text/javascript" src="./build/js/bundle.js" charset="utf-8"></script>
 </body>
 </html>

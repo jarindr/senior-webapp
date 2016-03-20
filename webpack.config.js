@@ -12,7 +12,7 @@ module.exports = {
     loaders: [
       {
         test: /\.js$/,
-        exclude: /(node_module|jquery)/,
+        exclude: /(node_module|jquery|materialize)/,
         loader: 'babel',
         query: {
           presets: ['es2015'],
@@ -20,7 +20,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        loader: 'style!css'
+        loader: 'style-loader!css-loader'
       },
       {
         test: /\.(woff|svg|ttf|eot)([\?]?.*)$/,
