@@ -11,7 +11,8 @@ export function inintializeGraph() {
   const chart = Highcharts.chart({
     chart: {
       type: 'line',
-      renderTo: 'graph'
+      renderTo: 'graph',
+
     },
     credits: {
       enabled: false

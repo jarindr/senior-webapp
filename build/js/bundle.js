@@ -19355,6 +19355,7 @@
 	    chart: {
 	      type: 'line',
 	      renderTo: 'graph'
+
 	    },
 	    credits: {
 	      enabled: false
