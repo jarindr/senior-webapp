@@ -1,9 +1,10 @@
 import { createHistory }  from 'history'
-import { action } from '../actions/action.js'
+import { getRouteActions } from '../actions/action.js'
+
 const history = createHistory()
 
 history.listen(function (location) {
-  action.getRouteActions(location)
+  getRouteActions(location)
 })
 
 export function changeState(data){

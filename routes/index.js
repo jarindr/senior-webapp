@@ -3,15 +3,20 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Chulalongkorn data center' })
-});
-
-
-router.post('/signin', function(req, res, next){
-  res.redirect('main')
+  res.render('index')
 })
+
+router.get('/lander',function (req,res,next) {
+  res.render('lander', {
+    login: 'Login Chula Users'
+  })
+})
+
 router.get('/signin', function(req, res, next){
   res.render('index')
+})
+router.post('/signin', function(req, res, next){
+  res.redirect('main')
 })
 
 

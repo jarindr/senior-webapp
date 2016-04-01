@@ -1,24 +1,29 @@
-export const action = {
 
-  getRouteActions : function (location) {
-    switch (location.pathname) {
+import { changeState } from '../helpers/history'
+import {inintializeGraph } from '../graph.js'
 
-      case "/signin":
-      $('#login-form').slideUp().load('signin-form #login-form').slideDown()
+export function getRouteActions (location) {
+
+  switch (location.pathname) {
+
+    case "/":
+    $(".app").load('lander .lander-component',()=>{
+    })
+    break
+
+    case "/signin":
+    $(".app").load('lander .lander-component',()=>{
+      $('.signin-component').slideDown()
       $('#login').text('Login')
-      break
+    })
+    break
 
-      case "/":
-      $(".vc-child").load('/ .vc-child')
-      break
-      
-      case "/main":
-      $(".vc-child").load('main')
-      break
+    case "/main":
+    $(".app").hide().load('main .main-component',()=>{
+      inintializeGraph()
+      $(".app").fadeIn('slow')
+    })
+    break
 
-      default :
-
-
-    }
   }
 }
