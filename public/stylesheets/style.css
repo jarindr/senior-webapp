@@ -18,13 +18,21 @@ button:hover
     -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
     box-shadow: none;
 }
-
+#graph{
+  width: 100%;
+}
 /*helper*/
 .clear-padding {
   padding: 0 !important;
 }
 .margin-auto {
   margin: 0 auto;
+}
+.clear-margin {
+  margin: 0 !important;
+}
+.padding-vertical{
+  padding: 2rem 0 2rem 0 !important;
 }
 /*landing page*/
 #main-logo {
@@ -34,7 +42,7 @@ button:hover
 .centered {
   text-align: center;
 }
-.vc-child{
+.lander-component{
   position: absolute;
   top: 45%;
   width: 100%;
@@ -63,7 +71,43 @@ button:hover
 .pragiew {
   margin: 1.5em 0;
 }
+.grey-bg {
+  background-color: #565656;
+}
+.transparent-grey-bg {
+  background-color: #747474;
+  opacity: 0.8;
+}
 .excerp-content{
   background-color: #D35A95;
   text-align: center;
+}
+.white-text {
+  color: white;
+}
+.wrap {
+	margin:auto;
+	position:relative;
+}
+.wrap img {
+	width:100%;
+	height:auto;
+}
+.caption {
+	position:absolute;
+	top:5px;
+	left:0;
+	right:0;
+	bottom:10px;
+	overflow:auto;
+}
+.caption-inner {
+	display:table;
+	width:100%;
+	height:100%;
+}
+.caption-content {
+	display:table-cell;
+	vertical-align:middle;
+  padding-left: 5%;
 }
