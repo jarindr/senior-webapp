@@ -9,18 +9,26 @@ button:focus,
 button:active,
 button:hover
 {
-    outline:0px !important;
-    -webkit-appearance:none;
+  outline:0px !important;
+  -webkit-appearance:none;
 }
 .form-control:focus {
-    border-color: #66afe9;
-    outline: 0;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
-    box-shadow: none;
+  border-color: #66afe9;
+  outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
+  box-shadow: none;
 }
 #graph{
   height:100%;
   width: 100%;
+}
+body,html{
+  height:100%;
+  width: 100%;
+}
+#particle{
+  position: absolute;
+  z-index: 0;
 }
 /*helper*/
 .clear-padding {
@@ -39,11 +47,13 @@ button:hover
 #main-logo {
   text-align: center;
   margin-bottom: 2rem;
+  color: white;
 }
 .centered {
   text-align: center;
 }
 .lander-component{
+  z-index: 1;
   position: absolute;
   top: 45%;
   width: 100%;
@@ -82,33 +92,35 @@ button:hover
 .excerp-content{
   background-color: #D35A95;
   text-align: center;
+  padding-top:10px;
+  padding-bottom: 20px;
 }
 .white-text {
   color: white;
 }
 .wrap {
-	margin:auto;
-	position:relative;
+  margin:auto;
+  position:relative;
 }
 .wrap img {
-	width:100%;
-	height:auto;
+  width:100%;
+  height:auto;
 }
 .caption {
-	position:absolute;
-	top:5px;
-	left:0;
-	right:0;
-	bottom:10px;
-	overflow:auto;
+  position:absolute;
+  top:5px;
+  left:0;
+  right:0;
+  bottom:10px;
+  overflow:auto;
 }
 .caption-inner {
-	display:table;
-	width:100%;
-	height:100%;
+  display:table;
+  width:100%;
+  height:100%;
 }
 .caption-content {
-	display:table-cell;
-	vertical-align:middle;
+  display:table-cell;
+  vertical-align:middle;
   padding-left: 5%;
 }

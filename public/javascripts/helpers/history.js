@@ -1,10 +1,12 @@
 import { createHistory }  from 'history'
-import { getRouteActions } from '../actions/action.js'
+import { getRouteActionsPush , getRouteActionsPop } from '../actions/action.js'
 
 const history = createHistory()
 
 history.listen(function (location) {
-  getRouteActions(location)
+  location.action === 'POP'
+  ? getRouteActionsPop(location)
+  : getRouteActionsPush(location)
 })
 
 export function changeState(data){
