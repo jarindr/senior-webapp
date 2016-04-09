@@ -258,7 +258,7 @@ export function inintializeParticle() {
 		background: '#1a252f',
 		interactive: true,
 		speed: 'fast',
-		density: 'medium'
+		density: 'high'
 	};
 	new ParticleNetwork(document.getElementById('particle'), options) // it it this shit
 

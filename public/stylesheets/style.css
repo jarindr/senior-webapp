@@ -77,6 +77,9 @@ body,html{
   list-style-type: none;
   padding: 0;
 }
+body{
+  overflow: hidden;
+}
 
 /*main*/
 .pragiew {
