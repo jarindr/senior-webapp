@@ -2,88 +2,184 @@
 import { setHighchartsTheme } from '../javascripts/graphs/theme.js'
 
 export function inintializeGraph() {
-  $(".dial").val(86).knob({
-    "min":1,
-    "max":100,
-    "fgColor":'#F8BBD0',
-    'thickness':.2,
-    'readOnly':true,
-    'angleArc':300,
-    'inputColor':'white',
-    'width':'40px'
-    })
-    var i= 0
-    var a = setInterval(function () {
-      $(".dial").val(i).trigger('change')
-      i++
-      if(i==79){
-        clearInterval(a)
-        $(".dial").val(i+'%')
+
+  var myCircle = Circles.create({
+    id:                  'student-circle-graph',
+    radius:              100,
+    value:               43,
+    maxValue:            100,
+    width:               25,
+    text:                function(value){return value + '%';},
+    colors:              ['#D3B6C6', '#4B253A'],
+    duration:            400,
+    wrpClass:            'circles-wrp',
+    textClass:           'circles-text',
+    valueStrokeClass:    'circles-valueStroke',
+    maxValueStrokeClass: 'circles-maxValueStroke',
+    styleWrapper:        true,
+    styleText:           true
+  });
+
+
+  const Highcharts = require('highcharts/highstock')
+  require('highcharts/modules/exporting')(Highcharts)
+
+  //setHighchartsTheme(Highcharts)
+
+  const highschoolBarGraph = Highcharts.chart({
+    chart: {
+      type: 'bar',
+      renderTo: 'highschool-bar-graph',
+
+    },
+    credits: {
+      enabled: false
+    },
+    exporting: {
+      enabled: false
+    },
+    xAxis: {
+      categories:['Assumption College','Suankularb College','Saint Gabriel College','Triamudom Suksa School','Bangkok Christian College']
+    },
+    yAxis: {
+      gridLineWidth: 0,
+      minorGridLineWidth: 0,
+      visible: false,
+
+      title: {
+        text: 'Number of Students'
       }
-    }, 10)
+    },
+    title:{
+      text:null
+    },
+    plotOptions:{
+      bar:{
+        dataLabels: {
+          enabled: true,
+          format:'{y} person/year',
+          align:'right',
+          inside:false,
+          color:'white'
+        }
+      },
+      series: {
+        pointPadding: 0.05,
+        groupPadding: 0.1,
+      }
+    },
+    tooltip: {
+      valueSuffix: ' students'
+    },
+    legend: {
+      enabled:false,
+      layout: 'vertical',
+      align: 'right',
+      verticalAlign: 'middle',
+      borderWidth: 0
+    },
 
-
-    const Highcharts = require('highcharts/highstock')
-    require('highcharts/modules/exporting')(Highcharts)
-
-    setHighchartsTheme(Highcharts)
-
-    const chart = Highcharts.chart({
-      chart: {
-        type: 'line',
-        renderTo: 'graph',
-
-      },
-      credits: {
-        enabled: false
-      },
-      exporting: {
-        enabled: false
-      },
-      xAxis: {
-        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-        'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-      },
-      yAxis: {
-        title: {
-          text: 'Temperature (°C)'
-        },
-        plotLines: [{
-          value: 0,
-          width: 1,
-          color: '#808080'
-        }]
-      },
-      tooltip: {
-        valueSuffix: '°C'
-      },
-      legend: {
-        layout: 'vertical',
-        align: 'right',
-        verticalAlign: 'middle',
-        borderWidth: 0
-      },
-      series: [{
-        name: 'Tokyo',
-        data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6, 26.5, 23.3, 18.3, 13.9, 9.6
-        , 26.5, 23.3, 18.3, 13.9, 9.6, 26.5, 23.3, 18.3, 13.9, 9.6, 26.5, 23.3, 18.3, 13.9, 9.6
-      , 26.5, 23.3, 18.3, 13.9, 9.6
-    , 26.5, 23.3, 18.3, 13.9, 9.6, 26.5, 23.3, 18.3, 13.9, 9.6, 26.5, 23.3, 18.3, 13.9, 9.6, 26.5, 23.3, 18.3, 13.9, 9.6, 26.5, 23.3, 18.3, 13.9, 9.6, 26.5, 23.3, 18.3, 13.9, 9.6, 26.5, 23.3, 18.3, 13.9, 9.6, 26.5, 23.3, 18.3, 13.9, 9.6, 26.5, 23.3, 18.3, 13.9, 9.6, 26.5, 23.3, 18.3, 13.9, 9.6, 26.5, 23.3, 18.3, 13.9, 9.6, 26.5, 23.3, 18.3, 13.9, 9.6, 26.5, 23.3, 18.3, 13.9, 9.6, 26.5, 23.3, 18.3, 13.9, 9.6]
+    series: [{
+      data: [{
+        color: '#00FF00',
+        y: 799
       }, {
-        name: 'New York',
-        data: [-0.2, 0.8, 5.7, 11.3, 17.0, 22.0, 24.8, 24.1, 20.1, 14.1, 8.6, 2.5]
-      }, {
-        name: 'Berlin',
-        data: [-0.9, 0.6, 3.5, 8.4, 13.5, 17.0, 18.6, 17.9, 14.3, 9.0, 3.9, 1.0]
-      }, {
-        name: 'London',
-        data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
+        color: '#FF00FF',
+        y: 521
+      },
+      {
+        color: '#FF00FF',
+        y: 731
+      },
+      {
+        color: '#FF00FF',
+        y: 301
+      },
+      {
+        color: '#FF00FF',
+        y: 451
       }]
-    })
-    setTimeout(function () {
-      chart.reflow()
-    }, 0)
+    }]
+  })
+
+  const FacultyBarGraph = Highcharts.chart({
+    chart: {
+      type: 'column',
+      renderTo: 'faculty-bar-graph',
+      backgroundColor: 'transparent'
+
+    },
+    credits: {
+      enabled: false
+    },
+    exporting: {
+      enabled: false
+    },
+    xAxis: {
+
+    },
+    yAxis: {
+      gridLineWidth: 0,
+      minorGridLineWidth: 0,
+      visible: false,
+
+      title: {
+        text: 'Number of Students'
+      }
+    },
+    title:{
+      text:null
+    },
+    plotOptions:{
+      column:{
+        dataLabels: {
+          enabled: true,
+          inside:true
+        }
+      },
+      series: {
+        pointPadding: 0.05,
+        groupPadding: 0.1,
+      }
+    },
+    tooltip: {
+      valueSuffix: ' students'
+    },
+    legend: {
+      enabled:false
+    },
+
+    series: [{
+      data: [{
+        color: '#00FF00',
+        y: 3.12
+      }, {
+        color: '#FF00FF',
+        y: 2.18
+      },
+      {
+        color: '#FF00FF',
+        y: 3.74
+      },
+      {
+        color: '#FF00FF',
+        y: 2.89
+      },
+      {
+        color: '#FF00FF',
+        y: 3.42
+      }]
+    }]
+  })
 
 
 
-  }
+  // // hack for reflowing highchart when initialize
+  // setTimeout(function () {
+  //   chart.reflow()
+  // }, 0)
+
+
+
+
+}

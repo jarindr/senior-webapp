@@ -11,4 +11,11 @@ $(document).ready(()=>{
     }
   })
 
+  // $('.left-nav').click(function () {
+  //   $('.main-content').animate({'left': 0},'fast',function () {
+  //
+  //   })
+  //
+  // })
+
 })
