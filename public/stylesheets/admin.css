@@ -12,6 +12,9 @@
 #cu-logo {
   width: 100%;
 }
+.brand-logo {
+  margin-top:20%;
+}
 .nav-item>a {
   font-weight: bold;
   font-size: 13px !important;
