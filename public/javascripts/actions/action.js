@@ -19,6 +19,26 @@ export function getRouteActionsPush (location) {
       inintializeGraph()
     })
     break
+    case '/dashboard':
+    app.load('dashboard .home',()=>{
+
+    })
+    break
+    case '/dashboard/data':
+    app.load('admin .data',()=>{
+
+    })
+    break
+    case "/dashboard/import":
+    app.load('admin .import',()=>{
+
+    })
+    break
+    case "/dashboard/export":
+    app.load('admin .export',()=>{
+
+    })
+    break
   }
 }
 export function getRouteActionsPop (location) {

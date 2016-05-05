@@ -52,6 +52,8 @@
 
 	__webpack_require__(11);
 
+	__webpack_require__(43);
+
 /***/ },
 /* 1 */
 /***/ function(module, exports, __webpack_require__) {
@@ -20208,9 +20210,21 @@
 	  $(document).on('click', '#login', function () {
 
 	    if (window.location.pathname == "/") {
+
 	      (0, _history.changeState)({ path: '/signin' });
 	    } else {
-	      (0, _history.changeState)({ path: '/main' });
+	      // console.log('click')
+	      var user = $('#username').val();
+	      var pass = $('#password').val();
+	      console.log("inputs" + user + pass);
+	      if (user == 'admin' && pass == 'password') {
+	        (0, _history.changeState)({ path: '/main' });
+	      } else {
+	        // console.log('else')
+	        $('#alert').css({
+	          'display': 'block'
+	        });
+	      }
 	    }
 	  });
 
@@ -22657,6 +22671,18 @@
 	        (0, _graph.inintializeGraph)();
 	      });
 	      break;
+	    case '/dashboard':
+	      app.load('dashboard .home', function () {});
+	      break;
+	    case '/dashboard/data':
+	      app.load('admin .data', function () {});
+	      break;
+	    case "/dashboard/import":
+	      app.load('admin .import', function () {});
+	      break;
+	    case "/dashboard/export":
+	      app.load('admin .export', function () {});
+	      break;
 	  }
 	}
 	function getRouteActionsPop(location) {
@@ -22947,6 +22973,63 @@
 		};
 		new ParticleNetwork(document.getElementById('particle'), options); // it it this shit
 	}
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
+
+/***/ },
+/* 43 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function($) {'use strict';
+
+	var _history = __webpack_require__(12);
+
+	$(document).ready(function () {
+	  $(document).on('click', '#home', function () {
+	    (0, _history.changeState)({ path: '/dashboard' });
+	  });
+	  $(document).on('click', '#alldata', function () {
+	    console.log('datadata');
+	    (0, _history.changeState)({ path: '/dashboard/data' });
+	  });
+	  $(document).on('click', '#import', function () {
+	    (0, _history.changeState)({ path: '/dashboard/import' });
+	  });
+	  $(document).on('click', '#export', function () {
+	    (0, _history.changeState)({ path: '/dashboard/export' });
+	  });
+	  $(document).on('click', '#show-import-manual', function () {
+	    $('#import-manual').css({
+	      'position': 'relative'
+	    });
+	    $('#import-manual').animate({
+	      left: '0%'
+	    }, 500);
+	  });
+	  $(document).on('click', '#show-export-manual', function () {
+	    $('#export-manual').css({
+	      'position': 'relative'
+	    });
+	    $('#export-manual').animate({
+	      left: '0%'
+	    }, 500);
+	  });
+	  $(document).on('click', '#remove-import', function () {
+	    $('#import-manual').css({
+	      'position': 'absolute'
+	    });
+	    $('#import-manual').animate({
+	      left: '-100%'
+	    }, 500);
+	  });
+	  $(document).on('click', '#remove-export', function () {
+	    $('#export-manual').css({
+	      'position': 'absolute'
+	    });
+	    $('#export-manual').animate({
+	      left: '-100%'
+	    }, 500);
+	  });
+	});
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ }

@@ -89,6 +89,10 @@ body,html{
 .signin-form {
   margin-top: 2rem;
 }
+#alert {
+  display: none;
+  color: red;
+}
 #login-form{
 
 }

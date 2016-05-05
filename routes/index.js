@@ -27,7 +27,12 @@ router.get('/signin-form', function(req, res, next){
 router.get('/graph', function(req, res, next) {
   res.render('graph')
 });
-
+router.get('/dashboard', function(req,res,next){
+  res.render('dashboard')
+})
+router.get('/dashboard/admin', function(req,res,next){
+  res.render('admin')
+})
 router.get('/main', function(req, res, next) {
   res.render('main', {
     title: 'Chulalongkorn data center',

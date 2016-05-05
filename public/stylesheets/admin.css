@@ -1,0 +1,45 @@
+.page-title {
+  line-height: 70px;
+  font-size: 30px;
+}
+
+.top-nav {
+  height: 70px;
+}
+.container-cus {
+  margin-left: 20%;
+}
+#cu-logo {
+  width: 100%;
+}
+.nav-item>a {
+  font-weight: bold;
+  font-size: 13px !important;
+  text-align: center;
+}
+.no-hover:hover{
+  background-color: white !important;
+}
+.mid {
+  margin: auto;
+}
+#import-manual{
+  position: absolute;
+  left: -100%;
+}
+#show-import-manual:hover{
+  color: #f8bbd0 !important;
+}
+#export-manual{
+  position: absolute;
+  left: -100%;
+}
+#show-export-manual:hover{
+  color: #f8bbd0 !important;
+}
+#remove-import:hover {
+  cursor: pointer;
+}
+#remove-export:hover {
+  cursor: pointer;
+}
