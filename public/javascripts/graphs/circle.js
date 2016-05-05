@@ -81,6 +81,7 @@
     this._movingPath     = null;
     this._wrapContainer  = null;
     this._textContainer  = null;
+    this._textSize       = options.textSize || options.radius * .7
 
     this._wrpClass       = options.wrpClass || 'circles-wrp';
     this._textClass      = options.textClass || 'circles-text';
@@ -147,7 +148,7 @@
           left:       0,
           textAlign:  'center',
           width:      '100%',
-          fontSize:   (this._radius * .7) + 'px',
+          fontSize:   (this._textSize) + 'px',
           height:     this._svgSize + 'px',
           lineHeight: this._svgSize + 'px'
         };

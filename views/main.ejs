@@ -1,24 +1,10 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <link rel="stylesheet" type="text/css" href="./bower_components/materialize/dist/css/materialize.min.css" />
-  <link rel="stylesheet" type="text/css" href="./public/stylesheets/style.css" />
-  <link rel="stylesheet" type="text/css" href="./public/stylesheets/circle.css" />
-</head>
+<% include head-tag %>
 <body>
   <div class = "app">
     <div class='main-component'>
-      <div class='left-nav'>
-        <ul>
-          <li><img src='../public/images/icons/menu button.png'</li>
-          <li><img src='../public/images/icons/login menu.png'</li>
-          <li><img src='../public/images/icons/data menu.png'</li>
-          <li><img src='../public/images/icons/Q&A menu.png'</li>
-          <li><img src='../public/images/icons/mail menu.png'</li>
-        </ul>
-      </div>
+
       <div class='main-content'>
         <div class="col s12">
           <div class="wrap">
@@ -50,48 +36,58 @@
             </div>
           </div>
         </div>
+
+        <!-- start row example graph-->
         <div class="row excerp-content clear-margin white-text">
+
           <div class="col s3 row-graph-example">
             <h5><b>Student</b></h5>
-            <div class='circle-wp'>
-              <div class='circle' id='student-circle-graph'>
-              </div>
+            <div class='circle' id='student-circle-graph'>
             </div>
             <span class='graph-description'>of student graduate each year</span>
           </div>
+
           <div class="col s3 row-graph-example">
             <h5><b>Faculty</b></h5>
             <div id='faculty-bar-graph'>
             </div>
             <span class='graph-description'>Arts has highest average GPA of every faulty in Chula</span>
           </div>
-          <div class="col s3 row-graph-example">
-            <h5><b>Ranking</b></h5>
-            GRAPH
-            <p>In Thailand university ranking</p>
-          </div>
+
           <div class="col s3 row-graph-example">
             <h5><b>Admission</b></h5>
-            GRAPH
-            <p>2017 average admission score will be approximatly 19,782</p>
+            <div id='admission-line-graph'></div>
+            <span>2017 average admission score will be approximatly 19,782</span>
+          </div>
+
+          <div class="col s3 row-graph-example">
+            <h5><b>Ranking</b></h5>
+            <div class='circle' id='ranking-circle-graph'></div>
+            <span>In Thailand university ranking</span>
           </div>
         </div>
+        <!-- end row example graph-->
+
+        <!-- start highschool graph-->
         <div class="row clear-margin white-text">
-          <div class="col s6 grey-bg padding-vertical" style='height:200px; position:relative;'>
+          <div class="col s5 grey-bg padding-vertical" style='height:200px; position:relative;'>
             <span id='highschool-triangle'></span>
             <div class="col s8 offset-s2 centered">
               <h5><b>Top 5 highschools</b></h5>
               <p>Synth polaroid bitters chillwave pickled. Vegan disrupt tousled, Portland keffiyeh aesthetic food truck sriracha cornhole single-origin coffee church-key roof party. </p>
             </div>
           </div>
-          <div class="col s6 clear-padding" style="color:black; height:200px;">
+          <div class="col s7 clear-padding" style="color:black; height:200px;">
             <div id='highschool-bar-graph' class='fit-in'></div>
           </div>
         </div>
+        <!-- end highschool graph-->
+
         <div class="row clear-margin white-text transparent-grey-bg padding-vertical">
           <div class="col s6 centered">#Chulalongkorn on social networks</div>
           <div class="col s6 centered">No information you're looking for?</div>
         </div>
+
       </div>
     </div>
   </div>

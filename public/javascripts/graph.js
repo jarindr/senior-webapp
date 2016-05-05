@@ -1,28 +1,47 @@
 
 import { setHighchartsTheme } from '../javascripts/graphs/theme.js'
 
+const Highcharts = require('highcharts/highstock')
+require('highcharts/modules/exporting')(Highcharts)
+
 export function inintializeGraph() {
 
-  var myCircle = Circles.create({
+  var studentCircleGraph = Circles.create({
     id:                  'student-circle-graph',
     radius:              100,
-    value:               43,
+    value:               87,
     maxValue:            100,
     width:               25,
     text:                function(value){return value + '%';},
-    colors:              ['#D3B6C6', '#4B253A'],
+    colors:              ['#D3B6C6', '#7E003E'],
     duration:            400,
     wrpClass:            'circles-wrp',
+    textClass:           'circles-text-student',
+    valueStrokeClass:    'circles-valueStroke',
+    maxValueStrokeClass: 'circles-maxValueStroke',
+    styleWrapper:        true,
+    styleText:           true
+  })
+
+  var rankingCircleGraph = Circles.create({
+    id:                  'ranking-circle-graph',
+    radius:              50,
+    value:               100,
+    maxValue:            100,
+    width:               2,
+    text:                function(value){return 2 + 'ND'},
+    colors:              ['#D3B6C6', 'white'],
+    duration:            400,
+    wrpClass:            'circles-wrp-ranking',
     textClass:           'circles-text',
     valueStrokeClass:    'circles-valueStroke',
     maxValueStrokeClass: 'circles-maxValueStroke',
     styleWrapper:        true,
     styleText:           true
-  });
+  })
 
 
-  const Highcharts = require('highcharts/highstock')
-  require('highcharts/modules/exporting')(Highcharts)
+
 
   //setHighchartsTheme(Highcharts)
 
@@ -30,6 +49,7 @@ export function inintializeGraph() {
     chart: {
       type: 'bar',
       renderTo: 'highschool-bar-graph',
+
 
     },
     credits: {
@@ -81,22 +101,22 @@ export function inintializeGraph() {
 
     series: [{
       data: [{
-        color: '#00FF00',
+        color: '#bb1667',
         y: 799
       }, {
-        color: '#FF00FF',
+        color: '#7E003E',
         y: 521
       },
       {
-        color: '#FF00FF',
+        color: '#D35A95',
         y: 731
       },
       {
-        color: '#FF00FF',
+        color: '#F3D1E2',
         y: 301
       },
       {
-        color: '#FF00FF',
+        color: '#3000018',
         y: 451
       }]
     }]
@@ -106,7 +126,8 @@ export function inintializeGraph() {
     chart: {
       type: 'column',
       renderTo: 'faculty-bar-graph',
-      backgroundColor: 'transparent'
+      backgroundColor: 'transparent',
+      height: 200
 
     },
     credits: {
@@ -116,15 +137,23 @@ export function inintializeGraph() {
       enabled: false
     },
     xAxis: {
-
+      visible:false,
+      labels: {
+        style: {
+          color: 'white'
+        }
+      }
     },
     yAxis: {
-      gridLineWidth: 0,
-      minorGridLineWidth: 0,
-      visible: false,
+      visible: true,
+      labels: {
+        style: {
+          color: 'white'
+        }
+      },
 
       title: {
-        text: 'Number of Students'
+        text: null
       }
     },
     title:{
@@ -151,35 +180,95 @@ export function inintializeGraph() {
 
     series: [{
       data: [{
-        color: '#00FF00',
-        y: 3.12
+        color: '#bb1667',
+        y: 3.13
       }, {
-        color: '#FF00FF',
-        y: 2.18
+        color: '#F3D1E2',
+        y: 2.15
       },
       {
-        color: '#FF00FF',
-        y: 3.74
+        color: '#F3D1E2',
+        y: 4.00
       },
       {
-        color: '#FF00FF',
-        y: 2.89
+        color: '#F3D1E2',
+        y: 3.5
       },
       {
-        color: '#FF00FF',
-        y: 3.42
+        color: '#F3D1E2',
+        y: 2.6
       }]
     }]
+
   })
+  const admissionLinerGraph = Highcharts.chart({
+    chart: {
+      type: 'line',
+      renderTo: 'admission-line-graph',
+      backgroundColor: 'transparent',
+      height: 200
+
+    },
+    credits: {
+      enabled: false
+    },
+    exporting: {
+      enabled: false
+    },
+    xAxis: {
 
 
+    },
+    yAxis: {
 
-  // // hack for reflowing highchart when initialize
+      visible: true,
+
+
+      title: {
+        text: null
+      }
+    },
+    title:{
+      text:null
+    },
+    plotOptions:{
+      column:{
+        dataLabels: {
+          enabled: true,
+          inside:true
+        }
+      },
+      series: {
+        pointPadding: 0.05,
+        groupPadding: 0.1,
+        color:'white'
+      }
+    },
+    tooltip: {
+      valueSuffix: ' students'
+    },
+    legend: {
+      enabled:false
+    },
+
+    series: [{
+      data: randomData()
+    }]
+
+  })
+  function randomData() {
+    let temp = []
+    for(var i=0;i<10;i++){
+      temp.push({
+        color: '#7E003E',
+        y: Math.random()*5
+      })
+    }
+    return temp
+  }
+  // // // hack for reflowing highchart when initialize
   // setTimeout(function () {
   //   chart.reflow()
   // }, 0)
-
-
-
 
 }
