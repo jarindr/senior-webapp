@@ -1,0 +1,107 @@
+/*main*/
+.pragiew {
+  margin: 1.5em 0;
+}
+.main-content{
+  position: absolute;
+  top:42px;
+
+}
+.grey-bg {
+  background-color: #565656;
+}
+.transparent-grey-bg {
+  background-color: #747474;
+  opacity: 0.8;
+  vertical-align: center;
+}
+.excerp-content{
+  background-color: #D35A95;
+  text-align: center;
+  padding-top:10px;
+  padding-bottom: 20px;
+}
+.white-text {
+  color: white;
+
+}
+.find-out-graph{
+  margin: 0 auto;
+  margin-top: 7px;
+  border:1px solid white;
+  width: 90px;
+  font-size: 12px;
+  text-align: center;
+}
+.wrap {
+  margin:auto;
+  position:relative;
+  background-image:url('../background/cu1.jpg');
+  background-position: center;
+  background-size: cover;
+  height: 50vh;
+}
+.wrap img {
+  width:100%;
+  height:auto;
+}
+.wrap-overlay{
+  background-color: black;
+  position: absolute;
+  top:0;
+  bottom: 0;
+  left:0;
+  right:0;
+  opacity: 0.4;
+}
+.caption {
+  position:absolute;
+  top:5px;
+  left:0;
+  right:0;
+  color: white;
+  bottom:10px;
+  font-weight: 200;
+  overflow:auto;
+}
+.caption-text-head{
+  font-size: 35px;
+}
+.caption-text-context{
+
+  font-size:40px;
+  color:#E91E63;
+}
+.footer-etc{
+  font-size: 25px;
+  font-weight: 200;
+  width: 500px;
+  margin: 0 auto;
+}
+.caption-inner {
+  display:table;
+  width:100%;
+  height:100%;
+}
+.quote-row{
+  background-color: #FCE4EC;
+  padding: 5vh 0;
+}
+.caption-content {
+  display:table-cell;
+  vertical-align:middle;
+  padding-left: 5%;
+}
+
+#highschool-triangle{
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 25px 0 25px 25px;
+  border-color: transparent transparent transparent  #565656;
+  position: absolute;
+  right:-25px;
+  top:20px;
+  z-index: 100
+
+}
