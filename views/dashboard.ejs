@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" type="text/css" href="./bower_components/materialize/dist/css/materialize.min.css" />
+  <link rel="stylesheet" type="text/css" href="./public/stylesheets/style.css" />
+  <link rel="stylesheet" type="text/css" href="./public/stylesheets/admin.css" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+  <body>
+    <script type='text/javascript' src='filereader.js'></script>
+    <header>
+    <ul id="slide-out" class="side-nav fixed">
+      <li class='no-hover'>
+        <a id='logo-container' class='brand-logo'>
+          <div class="col s12">
+            <img src="public/images/CUIC_logo.svg" id='cu-logo'>
+          </div>
+        </a>
+      </li>
+      <li class='nav-item' id='home'>
+        <a class='waves-effect waves-teal' >Dashboard Home</a>
+      </li>
+      <li class='nav-item' id='alldata'>
+        <a class='waves-effect waves-teal' >Data Summary</a>
+      </li>
+      <li class='nav-item'>
+        <a class='waves-effect waves-teal' id='import'>Import new data</a>
+      </li>
+      <li class='nav-item'>
+        <a class='waves-effect waves-teal' id='export'>Export reports</a>
+      </li>
+    </ul>
+    <a href="#" data-activates="slide-out" class="button-collapse show-on-large"><i class="mdi-navigation-menu"></i></a>
+  </header>
+  <div class="container container-cus">
+    <div class="app">
+      <div class='home dash-main'>
+        <div class="row">
+          <div class="col s12">
+            <div class="card hoverable">
+              <div class="card-content black-text">
+                <span class="card-title">Welcome Admin</span>
+                <p>Welcome to CUIC dashboard. You can check all of the visualisation on the website, upload new date and export report from the visualisations. More feature is coming soon</p>
+              </div>
+              <div class="card-action">
+                <a href="#" class='pink-text text-lighten-2' id='show-import-manual'>How to import?</a>
+                <a href="#" class='pink-text text-lighten-2'id='show-export-manual'>How to export?</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- end row -->
+        <div class="row" id='import-manual'>
+          <div class="col s12">
+            <div class="card hoverable">
+              <div class="card-content black-text">
+                <span class="card-title">Importing data to the visualisation</span><i class="material-icons right" id='remove-import'>cancel</i>
+                <p>This guide will guide you through how to import your dataset to visualise on the application</p><br><br>
+                <span class="card-title">Step 1 - Click the "Import new data" menu on the side bar. </span>
+                <div class='card-image'>
+                  <div class='row'>
+                    <div class="col">
+                      <img src="http://placehold.it/1050x350" class='mid'>
+                    </div>
+                  </div>
+                </div><br><br>
+                <span class="card-title">Step 2 - Choose the visualisation data on the application that you want to edit.</span>
+                <div class='card-image'>
+                  <div class='row'>
+                    <div class="col">
+                      <img src="http://placehold.it/1050x350" class='mid'>
+                    </div>
+                  </div>
+                </div><br><br>
+                <span class="card-title">Step 3 - Select the upload button to import data onto the application.</span>
+                <div class='card-image'>
+                  <div class='row'>
+                    <div class="col">
+                      <img src="http://placehold.it/1050x350" class='mid'>
+                    </div>
+                  </div>
+                </div>
+                <p>Keep in mind that format of your data must be in csv format. The data needed for the specific graph is shown in the graph selection screen.</p>
+                <br><br>
+                <span class="card-title">Step 4 - Check your result in the data summary page.</span>
+                <div class='card-image'>
+                  <div class='row'>
+                    <div class="col">
+                      <img src="http://placehold.it/1050x350" class='mid'>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <!-- end import manual -->
+      <div class="row" id='export-manual'>
+        <div class="col s12">
+          <div class="card hoverable">
+            <div class="card-content black-text">
+              <span class="card-title">Exporting data from the visualisations</span><i class="material-icons right" id='remove-export'>cancel</i>
+              <p>This guide will guide you through how to export data from the visualisation on the application to your local storage./p><br><br>
+              <span class="card-title">Step 1 - Click the "Export reports" menu on the side bar. </span>
+              <div class='card-image'>
+                <div class='row'>
+                  <div class="col">
+                    <img src="http://placehold.it/1050x350" class='mid'>
+                  </div>
+                </div>
+              </div><br><br>
+              <span class="card-title">Step 2 - Choose the avaliable report to export to your local storage.</span>
+              <p>The exported report will be in csv format.</p>
+              <div class='card-image'>
+                <div class='row'>
+                  <div class="col">
+                    <img src="http://placehold.it/1050x350" class='mid'>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end export manual -->
+      </div>
+    </div>
+  </div>
+  </body>
+  <script src='../build/js/bundle.js'></script>
+</html>
