@@ -1,0 +1,23 @@
+#faculty-bar-graph{
+}
+
+#admission-line-graph{
+width: 100%;
+margin: 0 auto;
+}
+
+#student-circle-graph{
+
+}
+
+.circles-wrp-ranking{
+  height: 200px;
+  margin: 0 auto;
+  padding-top: 50px;
+}
+.circles-wrp-ranking>.circles-text{
+  padding-top: 50px;
+}
+.circles-text-student{
+
+}

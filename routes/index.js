@@ -33,4 +33,8 @@ router.get('/main', function(req, res, next) {
     title: 'Chulalongkorn data center',
   })
 })
+
+router.get('/statsVisualization', function(req, res, next) {
+  res.render('statsVisualization')
+})
 module.exports = router;

@@ -7,29 +7,30 @@
       <%include _navbar%>
       <div class='main-content'>
         <div class="col s12">
+
           <div class="wrap">
-            <img src="../public/images/main/student.png" style="width:100%">
+            <div class='wrap-overlay'></div>
             <div class="caption">
               <div class="caption-inner">
                 <div class="caption-content">
-                  <h3>CHULA</h3>
-                  <p>is currently 99 years old.</p>
+                  <div class='caption-text-head'>Data about Chulalongkorn
+                  </div>
+                  <div class='caption-text-context'>Visualized.</div>
                 </div>
               </div>
             </div>
           </div>
+
         </div>
-        <div class="row">
-          <div class="col s6 offset-s3">
-            <div class="col s2">
-              <img src="../public/images/main/pragiew.png" class="img-responsive pragiew">
+        <div class="row" style='padding:5px 0;'>
+          <div class="col s8 offset-s2">
+            <div class="col s5">
+
+              <img src='../public/images/logo/chula-logo.png' style='width:100%; padding-top:20px;'>
             </div>
-            <div class="col s10">
-              <h4>
-                <b>Chula Logo: </b> Pra-giew
-              </h4>
+            <div class="col s7">
               <p class="text-justify">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut pretium pretium tempor.
+                Is currently <span id='chula-age' style='font-size:25px;'></span> years old Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut pretium pretium tempor.
                 Ut eget imperdiet neque. In volutpat ante semper diam molestie, et aliquam erat laoreet.
                 Sed sit amet arcu aliquet, molestie justo at, auctor nunc. Phasellus
               </p>
@@ -40,30 +41,34 @@
         <!-- start row example graph-->
         <div class="row excerp-content clear-margin white-text">
 
-          <div class="col s3 row-graph-example">
+          <div class="col s3">
             <h5><b>Student</b></h5>
             <div class='circle' id='student-circle-graph'>
             </div>
             <span class='graph-description'>of student graduate each year</span>
+            <div class='find-out-graph'>find out more</div>
           </div>
 
-          <div class="col s3 row-graph-example">
+          <div class="col s3">
             <h5><b>Faculty</b></h5>
             <div id='faculty-bar-graph'>
             </div>
             <span class='graph-description'>Arts has highest average GPA of every faulty in Chula</span>
+            <div class='find-out-graph'>find out more</div>
           </div>
 
-          <div class="col s3 row-graph-example">
+          <div class="col s3">
             <h5><b>Admission</b></h5>
             <div id='admission-line-graph'></div>
             <span>2017 average admission score will be approximatly 19,782</span>
+            <div class='find-out-graph'>find out more</div>
           </div>
 
-          <div class="col s3 row-graph-example">
+          <div class="col s3">
             <h5><b>Ranking</b></h5>
             <div class='circle' id='ranking-circle-graph'></div>
-            <span>In Thailand university ranking</span>
+            <span class='graph-description'>Thailand university ranking</span>
+            <div class='find-out-graph'>find out more</div>
           </div>
         </div>
         <!-- end row example graph-->
@@ -83,11 +88,16 @@
         </div>
         <!-- end highschool graph-->
 
-        <div class="row clear-margin white-text transparent-grey-bg padding-vertical">
-          <div class="col s6 centered">#Chulalongkorn on social networks</div>
-          <div class="col s6 centered">No information you're looking for?</div>
+        <div class="row clear-margin quote-row">
+          <div class="centered footer-etc">
+            <span class='double-quote'>&#8220</span>
+            Visualizations act as a campfire around which we
+            gather to tell stories.
+            <span class='double-quote'>&#8221</span>
+            ―Al Shalloway
+          </div>
         </div>
-
+        <%include _footer%>
       </div>
     </div>
   </div>

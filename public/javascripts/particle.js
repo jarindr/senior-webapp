@@ -1,5 +1,5 @@
 
-export function inintializeParticle() {
+export function inintializeParticle(id) {
 	$(window).resize()
 	// Create Particle class
 	var Particle = function (parent) {
@@ -251,8 +251,8 @@ export function inintializeParticle() {
 	}
 	const width = $(window).width()
 	const height = $(window).height()
-	$('.app').append('<div id="particle"></div>')
-	$('#particle').css({width,height})
+	$('.app').append('<div id='+id+'></div>')
+	$('#'+id).css({width,height})
 	var options = {
 		particleColor: '#fff',
 		background: '#1a252f',
@@ -260,6 +260,6 @@ export function inintializeParticle() {
 		speed: 'fast',
 		density: 'high'
 	};
-	new ParticleNetwork(document.getElementById('particle'), options) // it it this shit
+	new ParticleNetwork(document.getElementById(id), options) // it it this shit
 
 }
