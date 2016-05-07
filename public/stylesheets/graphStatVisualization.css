@@ -1,24 +1,37 @@
 /*landing page*/
-#main-logo {
-  text-align: center;
-  margin-bottom: 2rem;
-  color: white;
+.stat-content{
+  height: 100vh;
+  background-color: #eceff1;
 }
-.centered {
-  text-align: center;
-}
-.lander-component{
-  z-index: 1;
-  position: absolute;
-  top: 45%;
-  width: 100%;
-  transform: translateY(-50%);
+
+#general-number-graph{
+  width: 90%;
   margin: 0 auto;
+  height: 60vh;
+  margin-top: calc(50% - (50vh / 1.5));
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
+  -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
+  padding: 30px 15px;
+  position: relative;
 }
-.signin-form {
-  margin-top: 2rem;
-}
-#particle{
+#graph-loader{
   position: absolute;
-  z-index: 0;
+  top:0;
+  bottom: 0;
+  left: 0;
+  right:0;
+  z-index: 1000;
+}
+.general-number-graph-header{
+  width: 100%;
+  text-align: right;
+  font-size: 40px;
+  font-weight: 300;
+  color:#E91E63;
+  margin-top: 30vh;
+}
+.select-query-honor{
+  background-color: #cfd8dc;
+
 }

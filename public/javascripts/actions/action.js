@@ -18,6 +18,7 @@ export function getRouteActionsPush (location) {
 
     case "/main":
     app.load('main .main-component',()=>{
+      console.log('yo')
       inintializeGraph()
       inintializeMain()
     })
@@ -70,12 +71,13 @@ export function getRouteActionsPop (location) {
     break
 
     case "/main":
+
     inintializeGraph()
     inintializeMain()
     break
 
     case "/statsVisualization":
-    inintializeStats()    
+    inintializeStats()
     break
   }
 }

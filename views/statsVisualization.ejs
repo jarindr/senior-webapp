@@ -1,20 +1,56 @@
 <!DOCTYPE html>
 <html>
 <% include head-tag %>
+<style>
+.footer{
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+</style>
 <body>
   <div class = "app">
     <div class='stat-component'>
       <%include _navbar%>
       <div class='stat-content'>
-        <div class='row'>
-          <div id='general-number-graph'></div>
+        <div class='row' style="padding-left:3%;">
+          <div class='col s4'>
+            <div class='general-number-graph-header'>
+              Percentage of first honor in every faculty 2015
+            </div>
+            <select class="browser-default select-query-honor">
+              <option value="GRAD1">First honor</option>
+              <option value="GRAD2">Second honor</option>
+              <option value="GRAD3">Graduated</option>
+            </select>
+              <form action="#" style="float:right;">
+                <p>
+                  <input class='with-gap' name="group1" type="radio" id="asc" checked/>
+                  <label for="asc">Ascendent</label>
+                  <input class='with-gap' name="group1" type="radio" id="dsc" />
+                  <label for="dsc">Descendent</label>
+                </p>
+              </form>
+            </div>
+            <div class='col s8'>
+              <div id='general-number-graph'>
+              </div>
+
+            </div>
+          </div>
         </div>
+        <%include _footer%>
       </div>
-      <%include _footer%>
     </div>
   </div>
-</div>
-<script type="text/javascript" src="../public/javascripts/graphs/circle.js" charset="utf-8"></script>
-<script type="text/javascript" src="./build/js/bundle.js" charset="utf-8"></script>
+
+  <!-- start vendors -->
+  <script type="text/javascript" src="../public/javascripts/graphs/circle.js" charset="utf-8"></script>
+  <script type="text/javascript" src="../bower_components/jquery/dist/jquery.js" charset="utf-8"></script>
+  <script type="text/javascript" src="../bower_components/materialize/dist/js/materialize.js" charset="utf-8"></script>
+  <!-- end vendors -->
+
+  <script type="text/javascript" src="./build/js/bundle.js" charset="utf-8"></script>
+
 </body>
 </html>
