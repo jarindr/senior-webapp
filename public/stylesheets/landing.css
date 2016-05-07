@@ -22,3 +22,7 @@
   position: absolute;
   z-index: 0;
 }
+#alert {
+  display:none;
+  color:red;
+}
