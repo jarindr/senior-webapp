@@ -1,14 +1,14 @@
 /*landing page*/
 .stat-content{
   height: 100vh;
-  background-color: #eceff1;
+  background-color: #212121;
 }
 
 #general-number-graph{
   width: 90%;
   margin: 0 auto;
   height: 60vh;
-  margin-top: calc(50% - (50vh / 1.5));
+  margin-top: calc(50% - (50vh / 1.3));
   -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
   -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
   box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
@@ -22,6 +22,10 @@
   left: 0;
   right:0;
   z-index: 1000;
+}
+.type-selected-graph{
+  font-weight: 600;
+
 }
 .general-number-graph-header{
   width: 100%;

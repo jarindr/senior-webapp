@@ -7,8 +7,8 @@ export function setHighchartsTheme(Highcharts){
   }, null, document.getElementsByTagName('head')[0]);
 
   Highcharts.theme = {
-    colors: ["#2b908f", "#90ee7e", "#f45b5b", "#7798BF", "#aaeeee", "#ff0066", "#eeaaee",
-    "#55BF3B", "#DF5353", "#7798BF", "#aaeeee"],
+    colors: ["#4db6ac", "#4dd0e1", "#ab47bc", "#7e57c2", "#7986cb", "#42a5f5", "#4fc3f7",
+    "#b2ebf2", "#1de9b6", "#7798BF", "#d4e157",'#f57f17','#ffa726','#ff7043','#8d6e63','#9e9e9e','#78909c'],
     chart: {
       backgroundColor: {
         linearGradient: { x1: 0, y1: 0, x2: 1, y2: 1 },
