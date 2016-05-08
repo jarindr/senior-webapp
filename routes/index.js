@@ -38,31 +38,11 @@ router.get('/main', function(req, res, next) {
     title: 'Chulalongkorn data center',
   })
 })
-
-router.get('/statsVisualization', function(req, res, next) {
+router.get('/graduateStatistic', function(req, res, next) {
   res.render('statsVisualization')
 })
 
-router.get('/testDatabase',function (req,res,next) {
-
-  var group = [
-    {$group: {
-      _id: '$FACCODE',
-      name:{$push:'$FACNAME'},
-      GRAD1: {$sum: '$GRAD1'},
-      total:{$sum:'$TOT_1'}
-    }}
-  ]
-
-  const data = graduateStatsCollection.aggregate(group, function(err, logs){
-    if (err) { return def.reject(err) }
-    res.send( logs.map((fac)=>{
-      return {name:fac.name[0],y:fac.GRAD1/fac.total}
-    }))
-  })
-
-
-
-
+router.get('/foreignersStatistic',function (req,res,next) {
+  res.render('foreignersStatistic')
 })
 module.exports = router;

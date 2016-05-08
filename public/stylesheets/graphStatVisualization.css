@@ -35,7 +35,7 @@
   display:none;
 }
 .checkbox-list-container{
-  height:15vh;
+  max-height:15vh;
   border-radius: 2%;
   overflow-y: auto;
   background-color: #cfd8dc;

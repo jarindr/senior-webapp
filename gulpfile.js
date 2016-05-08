@@ -14,7 +14,7 @@ gulp.task('nodemon',['webpack'],function (cb) {
   return nodemon({
     // nodemon our expressjs server
     script: './bin/www',
-    watch: ['./routes/','./app','./bin/www','./database/'],
+    watch: ['./routes/','./app','./bin/www','./database/','./api'],
     // watch core server file(s) that require server restart on change
   })
     .on('start', function onStart() {

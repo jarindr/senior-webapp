@@ -20,5 +20,8 @@
     "jquery": "^2.2.2",
     "Materialize": "materialize#^0.97.5",
     "jquery-knob": "^1.2.13"
+  },
+  "devDependencies": {
+    "highcharts": "^4.2.5"
   }
 }

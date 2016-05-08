@@ -1,9 +1,11 @@
 
-import { changeState } from '../helpers/history'
-import {inintializeGraph } from '../graph.js'
-import { inintializeParticle } from '../particle.js'
-import { inintializeMain } from '../main.js'
-import { inintializeStats } from '../graphStatsVisualization.js'
+import { changeState }                         from '../helpers/history'
+import {inintializeGraph }                     from '../graph.js'
+import { inintializeParticle }                 from '../particle.js'
+import { inintializeMain }                     from '../main.js'
+import { inintializeStats }                    from '../graphStatsVisualization.js'
+import { inintializeGraphForeignersStatistic } from '../graphForeignersStatistic.js'
+
 const app = $('.app')
 
 export function getRouteActionsPush (location) {
@@ -24,10 +26,11 @@ export function getRouteActionsPush (location) {
     })
     break
 
-    case "/statsVisualization":
+    case "/graduateStatistic":
     app.load('statsVisualization .stats-component',()=>{
       inintializeStats()
     })
+
     break
     case '/dashboard':
     app.load('dashboard .home',()=>{
@@ -76,8 +79,13 @@ export function getRouteActionsPop (location) {
     inintializeMain()
     break
 
-    case "/statsVisualization":
+    case "/graduateStatistic":
     inintializeStats()
+    break
+
+    case "/foreignersStatistic":
+
+    inintializeGraphForeignersStatistic()
     break
   }
 }

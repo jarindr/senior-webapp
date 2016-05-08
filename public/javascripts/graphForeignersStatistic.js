@@ -1,23 +1,24 @@
 
 //import { setHighchartsTheme } from '../javascripts/graphs/theme.js'
 import { sort } from '../javascripts/helpers/sorting.js'
-import { getGraduateStats } from '../javascripts/api/backendRecieve'
+import { getGraduateStats,getForeignersStats } from '../javascripts/api/backendRecieve'
 import { createCheckboxList } from '../javascripts/component/selectCheckbox.js'
 import * as _ from 'lodash'
-// const Highcharts = require('highcharts/highstock')
-// require('highcharts/modules/exporting')(Highcharts)
+//const Highcharts = require('highcharts/highstock')
+//require('highcharts/modules/exporting')(Highcharts)
 //setHighchartsTheme(Highcharts)
 
 let admissionLinerGraph = null
 
 function inintializeGraph(data) {
+
   admissionLinerGraph = Highcharts.chart({
     // shuold i even shuffle the color
     colors: ["#4db6ac", "#4dd0e1", "#ab47bc", "#7e57c2", "#7986cb", "#42a5f5", "#4fc3f7",
     "#b2ebf2", "#1de9b6", "#7798BF", "#d4e157",'#f57f17','#ffa726','#ff7043','#8d6e63','#9e9e9e','#78909c'],
 
     chart: {
-      type: 'column',
+      type: 'pie',
       renderTo: 'general-number-graph',
       backgroundColor: 'transparent',
       zoomType:'x',
@@ -37,7 +38,6 @@ function inintializeGraph(data) {
     xAxis: {
       title:{
       },
-      categories:data.map((t)=>{return t.name.replace('คณะ','')}),
       labels: {
         style: {
           color:'white',
@@ -52,9 +52,6 @@ function inintializeGraph(data) {
         text: null
       },
       labels:{
-        formatter:function(){
-          return (this.value*100).toFixed(1)+" %"
-        },
         style: {
           color:'white'
         }
@@ -64,47 +61,27 @@ function inintializeGraph(data) {
       text:null
     },
     plotOptions:{
-      pie: {
-        allowPointSelect: true,
-        cursor: 'pointer',
-        dataLabels: {
-          enabled: true,
-          style: {
-            color: 'black',
-            fontSize: 15
-          }
-        },
-        showInLegend: true
-      },
-      column:{
-        dataLabels: {
-          enabled: true,
-          formatter:function(){
-            return (this.y*100).toFixed(2)+" %"
-          },
-          style: {
-            color: 'white',
-            fontSize: 10,
-            textShadow:false
-
-          }
-        },
-        borderWidth:1,
-        borderColor:'grey'
-      },
       series: {
         color:'white',
         turboThreshold:0,
         pointPadding: 0.1,
-        groupPadding: 0.1
+        groupPadding: 0.1,
+        dataLabels:{
+          enabled:true,
+          style: {
+            color: 'white',
+            fontSize: 15,
+            textShadow:'none'
+          },
+          formatter:function () {
+            return this.key + ": " + this.y
+          }
+        }
 
       }
     },
     tooltip: {
-      valueSuffix: ' %',
-      formatter:function () {
-        return this.x+': '+(this.y*10).toFixed(3)
-      }
+      pointFormat: '{series.name}: <b>{point.y:.1f}%</b>'
     },
     legend: {
       enabled:false,
@@ -116,11 +93,30 @@ function inintializeGraph(data) {
       }
     },
     series: [{
+      name: 'percentage',
       colorByPoint: true,
-      data:data.map((t)=>{return t.y})
-    }]
-
+      data: getSpecificData(data,$('.select-query-honor').val())
+    }],
+    drilldown: {
+      series: [{
+        name: 'Foreigners',
+        id: 'Foreigners',
+        data: [
+          ['v11.0', 24.13],
+          ['v8.0', 17.2],
+          ['v9.0', 8.11],
+          ['v10.0', 5.33],
+          ['v6.0', 1.06],
+          ['v7.0', 0.5]
+        ]
+      }]
+    }
   })
+}
+
+function getSpecificData(data,id) {
+  const ans = _.filter(data,(d)=>d[0].fac ===  id)[0].map((d)=>{return{name:d.name,y:d.y}}).splice(2)
+  return ans
 }
 
 
@@ -162,6 +158,9 @@ function inintializeHandler() {
         changeSort($(this).prop('id'))
       }
     })
+    getForeignersStats().then(function (data) {
+      initSelectCheckBox(data)
+    })
 
   })
 
@@ -170,7 +169,9 @@ function inintializeHandler() {
     setTimeout( ()=> {
       const type = getSortType()
       const uncheckBoxes = getAllUncheckedBox()
-      getGraduateStats($('.select-query-honor').val()).then(function (data) {
+
+      getForeignersStats().then(function (data) {
+        data = getSpecificData(data,$('.select-query-honor').val())
         const listArr = _.filter(sort(data,type),(d)=>{return _.includes(uncheckBoxes,d.name)})
         admissionLinerGraph.series[0].setData(listArr)
         admissionLinerGraph.xAxis[0].setCategories(listArr.map((t)=>{return t.name.replace('คณะ','')}))
@@ -202,28 +203,33 @@ function getSortType() {
 }
 
 function initSelectCheckBox(data) {
-  getGraduateStats($('.select-query-honor').val()).then(function (data) {
-    const lists = createCheckboxList(data.map((d)=>d.name))
+  getForeignersStats().then(function (data) {
+    const lists = createCheckboxList(_.uniq(getSpecificData(data,$('.select-query-honor').val()).map(e=>e.name)))
     $('.checkbox-list-container ul').empty().append(lists)
   })
 }
 
+
 function changeSort(type) {
-  getGraduateStats($('.select-query-honor').val()).then(function (data) {
+  getForeignersStats().then(function (data) {
     const uncheckBoxes = getAllUncheckedBox()
-    admissionLinerGraph.series[0].setData(_.filter(sort(data,type),(d)=>{return _.includes(uncheckBoxes,d.name)}))
-    admissionLinerGraph.xAxis[0]
-    .setCategories(_.filter(sort(data,type),(d)=>{return _.includes(uncheckBoxes,d.name)})
-    .map((t)=>{return t.name.replace('คณะ','')}))
+    data = getSpecificData(data,$('.select-query-honor').val())
+    admissionLinerGraph.series[0].setData(_.filter(sort(data,type)))
   })
 }
 
-export function inintializeStats() {
-  getGraduateStats()
+export function inintializeGraphForeignersStatistic() {
+
+  getForeignersStats()
   .then(function (data) {
+    let ans = _.uniq(data.map(d=>d[0].fac))
+    for(const d of ans){
+      $('.select-query-honor').append('<option value='+d+'>'+d+'</option>')
+    }
     inintializeGraph(data)
     initSelectCheckBox()
     inintializeHandler()
+
   })
 
 }
