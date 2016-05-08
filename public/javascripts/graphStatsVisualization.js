@@ -2,7 +2,8 @@
 import { setHighchartsTheme } from '../javascripts/graphs/theme.js'
 import { sort } from '../javascripts/helpers/sorting.js'
 import { getGraduateStats } from '../javascripts/api/backendRecieve'
-var _ = require('lodash')
+import { createCheckboxList } from '../javascripts/component/selectCheckbox.js'
+import * as _ from 'lodash'
 const Highcharts = require('highcharts/highstock')
 require('highcharts/modules/exporting')(Highcharts)
 //setHighchartsTheme(Highcharts)
@@ -12,8 +13,8 @@ let admissionLinerGraph = null
 function inintializeGraph(data) {
   admissionLinerGraph = Highcharts.chart({
     // shuold i even shuffle the color
-    colors: _.shuffle(["#4db6ac", "#4dd0e1", "#ab47bc", "#7e57c2", "#7986cb", "#42a5f5", "#4fc3f7",
-    "#b2ebf2", "#1de9b6", "#7798BF", "#d4e157",'#f57f17','#ffa726','#ff7043','#8d6e63','#9e9e9e','#78909c']),
+    colors: ["#4db6ac", "#4dd0e1", "#ab47bc", "#7e57c2", "#7986cb", "#42a5f5", "#4fc3f7",
+    "#b2ebf2", "#1de9b6", "#7798BF", "#d4e157",'#f57f17','#ffa726','#ff7043','#8d6e63','#9e9e9e','#78909c'],
 
     chart: {
       type: 'column',
@@ -25,7 +26,7 @@ function inintializeGraph(data) {
 
 
         }
-      }
+      },
     },
     credits: {
       enabled: false
@@ -39,7 +40,8 @@ function inintializeGraph(data) {
       categories:data.map((t)=>{return t.name.replace('คณะ','')}),
       labels: {
         style: {
-          color:'white'
+          color:'white',
+          fontSize:13
         }
       }
 
@@ -124,6 +126,17 @@ function inintializeGraph(data) {
 
 
 function inintializeHandler() {
+  $(document).mouseup(function (e){
+    const container = $(".checkbox-list-container")
+    const button = $('#controller')
+
+    if (!container.is(e.target) // if the target of the click isn't the container...
+    && container.has(e.target).length === 0
+    &&!button.is(e.target)) // ... nor a descendant of the container
+    {
+      container.slideUp()
+    }
+  })
   $('.type-selected-graph').text($('.select-query-honor').find('option:selected').text())
 
   $('#fixed').click(function () {
@@ -137,8 +150,12 @@ function inintializeHandler() {
   $('#dsc').click(function () {
     changeSort('dsc')
   })
+  $('#controller').click(function (e) {
+    $('.checkbox-list-container').slideToggle()
+  })
 
   $('.select-query-honor').on('change',function () {
+
     $('.with-gap').each(function () {
       if($(this).prop('checked')){
         $('.type-selected-graph').text($('.select-query-honor').find('option:selected').text())
@@ -147,18 +164,65 @@ function inintializeHandler() {
     })
 
   })
+
+  $('.stat-content').on('click','.checkbox-list-container ul li label',function (e) {
+    const id = $(this).parent().prop('id')
+    setTimeout( ()=> {
+      const type = getSortType()
+      const uncheckBoxes = getAllUncheckedBox()
+      getGraduateStats($('.select-query-honor').val()).then(function (data) {
+        const listArr = _.filter(sort(data,type),(d)=>{return _.includes(uncheckBoxes,d.name)})
+        admissionLinerGraph.series[0].setData(listArr)
+        admissionLinerGraph.xAxis[0].setCategories(listArr.map((t)=>{return t.name.replace('คณะ','')}))
+      })
+    }, 0)
+
+
+  })
+}
+
+function getAllUncheckedBox() {
+  let arr = []
+  $("input[type=checkbox]").each(function () {
+    if($(this).prop('checked')){
+      arr.push($(this).parent().prop('id'))
+    }
+  })
+  return arr
+}
+
+function getSortType() {
+  let temp = ''
+  $('.with-gap').each(function () {
+    if($(this).prop('checked')){
+      temp = $(this).next().text()
+    }
+  })
+  return temp
+}
+
+function initSelectCheckBox(data) {
+  getGraduateStats($('.select-query-honor').val()).then(function (data) {
+    const lists = createCheckboxList(data.map((d)=>d.name))
+    $('.checkbox-list-container ul').empty().append(lists)
+  })
 }
 
 function changeSort(type) {
   getGraduateStats($('.select-query-honor').val()).then(function (data) {
-    admissionLinerGraph.series[0].setData(sort(data,type).map((t)=>{return t.y}))
-    admissionLinerGraph.xAxis[0].setCategories(sort(data,type).map((t)=>{return t.name.replace('คณะ','')}))
+    const uncheckBoxes = getAllUncheckedBox()
+    admissionLinerGraph.series[0].setData(_.filter(sort(data,type),(d)=>{return _.includes(uncheckBoxes,d.name)}))
+    admissionLinerGraph.xAxis[0]
+    .setCategories(_.filter(sort(data,type),(d)=>{return _.includes(uncheckBoxes,d.name)})
+    .map((t)=>{return t.name.replace('คณะ','')}))
   })
 }
+
 export function inintializeStats() {
   getGraduateStats()
   .then(function (data) {
     inintializeGraph(data)
+    initSelectCheckBox()
     inintializeHandler()
   })
 

@@ -13,11 +13,13 @@
     <div class='stat-component'>
       <%include _navbar%>
       <div class='stat-content'>
+        <div class='controller'><i class="fa fa-bars" aria-hidden="true"></i></div>
         <div class='row' style="padding-left:3%;">
-          <div class='col s3'>
+          <div class='col s3 control-display'>
             <div class='general-number-graph-header'>
               Percentage of<br><span class='type-selected-graph'></span><br>in faculties 2015
             </div>
+
             <select class="browser-default select-query-honor">
               <option value="GRAD1">First honor</option>
               <option value="GRAD2">Second honor</option>
@@ -35,9 +37,19 @@
                 <input class='with-gap' name="group1" type="radio" id="dsc" />
                 <label for="dsc">Descendent</label>
               </p>
+
+              <button type='button' class='btn' id="controller" style="padding-right:20px; width:100%;">
+                Categories <i class="fa fa-caret-down" aria-hidden="true"></i>
+              </button>
+              <div class='checkbox-list-container'>
+                <ul>
+                </ul>
+              </div>
+
+
             </form>
           </div>
-          <div class='col s9'>
+          <div class='col s9' id="general-number-graph-container">
             <div id='general-number-graph'>
             </div>
 

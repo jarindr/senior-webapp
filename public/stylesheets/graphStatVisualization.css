@@ -7,13 +7,51 @@
 #general-number-graph{
   width: 90%;
   margin: 0 auto;
-  height: 60vh;
+  height: 70vh;
   margin-top: calc(50% - (50vh / 1.3));
   -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
   -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
   box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
   padding: 30px 15px;
   position: relative;
+}
+.controller{
+  position: absolute;
+  top:50px;
+  left:30px;
+  width:50px;
+  height:50px;
+  border-radius:50%;
+  display:inline-block;
+  font-size: 25px;
+  line-height: 50px;
+  background-color:#e91e63;
+  color:white;
+  text-align: center;
+  vertical-align: bottom;
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,1);
+  -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,1);
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,1);
+  display:none;
+}
+.checkbox-list-container{
+  height:15vh;
+  border-radius: 2%;
+  overflow-y: auto;
+  background-color: #cfd8dc;
+  display: none;
+
+}
+.checkbox-list-container ul li{
+  margin-bottom: 5px;
+  margin-left: 5px;
+  color: black;
+}
+.checkbox-list-container ul li:hover{
+  background-color: #b0bec5;
+}
+.checkbox-list-container ul li label{
+  color: black;
 }
 #graph-loader{
   position: absolute;
@@ -30,10 +68,10 @@
 .general-number-graph-header{
   width: 100%;
   text-align: right;
-  font-size: 40px;
+  font-size: 5.5vmin;
   font-weight: 300;
   color:#E91E63;
-  margin-top: 30vh;
+  margin-top: 20vh;
 }
 .select-query-honor{
   background-color: #cfd8dc;

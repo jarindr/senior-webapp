@@ -48,7 +48,7 @@
 
 	__webpack_require__(1);
 
-	__webpack_require__(43);
+	__webpack_require__(44);
 
 	__webpack_require__(37);
 
@@ -3843,7 +3843,14 @@
 
 	var _backendRecieve = __webpack_require__(40);
 
-	var _ = __webpack_require__(41);
+	var _selectCheckbox = __webpack_require__(41);
+
+	var _lodash = __webpack_require__(42);
+
+	var _ = _interopRequireWildcard(_lodash);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
 	var Highcharts = __webpack_require__(34);
 	__webpack_require__(35)(Highcharts);
 	//setHighchartsTheme(Highcharts)
@@ -3853,7 +3860,7 @@
 	function inintializeGraph(data) {
 	  admissionLinerGraph = Highcharts.chart({
 	    // shuold i even shuffle the color
-	    colors: _.shuffle(["#4db6ac", "#4dd0e1", "#ab47bc", "#7e57c2", "#7986cb", "#42a5f5", "#4fc3f7", "#b2ebf2", "#1de9b6", "#7798BF", "#d4e157", '#f57f17', '#ffa726', '#ff7043', '#8d6e63', '#9e9e9e', '#78909c']),
+	    colors: ["#4db6ac", "#4dd0e1", "#ab47bc", "#7e57c2", "#7986cb", "#42a5f5", "#4fc3f7", "#b2ebf2", "#1de9b6", "#7798BF", "#d4e157", '#f57f17', '#ffa726', '#ff7043', '#8d6e63', '#9e9e9e', '#78909c'],
 
 	    chart: {
 	      type: 'column',
@@ -3877,7 +3884,8 @@
 	      }),
 	      labels: {
 	        style: {
-	          color: 'white'
+	          color: 'white',
+	          fontSize: 13
 	        }
 	      }
 
@@ -3962,6 +3970,16 @@
 	}
 
 	function inintializeHandler() {
+	  $(document).mouseup(function (e) {
+	    var container = $(".checkbox-list-container");
+	    var button = $('#controller');
+
+	    if (!container.is(e.target) // if the target of the click isn't the container...
+	     && container.has(e.target).length === 0 && !button.is(e.target)) // ... nor a descendant of the container
+	      {
+	        container.slideUp();
+	      }
+	  });
 	  $('.type-selected-graph').text($('.select-query-honor').find('option:selected').text());
 
 	  $('#fixed').click(function () {
@@ -3975,8 +3993,12 @@
 	  $('#dsc').click(function () {
 	    changeSort('dsc');
 	  });
+	  $('#controller').click(function (e) {
+	    $('.checkbox-list-container').slideToggle();
+	  });
 
 	  $('.select-query-honor').on('change', function () {
+
 	    $('.with-gap').each(function () {
 	      if ($(this).prop('checked')) {
 	        $('.type-selected-graph').text($('.select-query-honor').find('option:selected').text());
@@ -3984,21 +4006,72 @@
 	      }
 	    });
 	  });
+
+	  $('.stat-content').on('click', '.checkbox-list-container ul li label', function (e) {
+	    var id = $(this).parent().prop('id');
+	    setTimeout(function () {
+	      var type = getSortType();
+	      var uncheckBoxes = getAllUncheckedBox();
+	      (0, _backendRecieve.getGraduateStats)($('.select-query-honor').val()).then(function (data) {
+	        var listArr = _.filter((0, _sorting.sort)(data, type), function (d) {
+	          return _.includes(uncheckBoxes, d.name);
+	        });
+	        admissionLinerGraph.series[0].setData(listArr);
+	        admissionLinerGraph.xAxis[0].setCategories(listArr.map(function (t) {
+	          return t.name.replace('คณะ', '');
+	        }));
+	      });
+	    }, 0);
+	  });
+	}
+
+	function getAllUncheckedBox() {
+	  var arr = [];
+	  $("input[type=checkbox]").each(function () {
+	    if ($(this).prop('checked')) {
+	      arr.push($(this).parent().prop('id'));
+	    }
+	  });
+	  return arr;
+	}
+
+	function getSortType() {
+	  var temp = '';
+	  $('.with-gap').each(function () {
+	    if ($(this).prop('checked')) {
+	      temp = $(this).next().text();
+	    }
+	  });
+	  return temp;
+	}
+
+	function initSelectCheckBox(data) {
+	  (0, _backendRecieve.getGraduateStats)($('.select-query-honor').val()).then(function (data) {
+	    var lists = (0, _selectCheckbox.createCheckboxList)(data.map(function (d) {
+	      return d.name;
+	    }));
+	    $('.checkbox-list-container ul').empty().append(lists);
+	  });
 	}
 
 	function changeSort(type) {
 	  (0, _backendRecieve.getGraduateStats)($('.select-query-honor').val()).then(function (data) {
-	    admissionLinerGraph.series[0].setData((0, _sorting.sort)(data, type).map(function (t) {
-	      return t.y;
+	    var uncheckBoxes = getAllUncheckedBox();
+	    admissionLinerGraph.series[0].setData(_.filter((0, _sorting.sort)(data, type), function (d) {
+	      return _.includes(uncheckBoxes, d.name);
 	    }));
-	    admissionLinerGraph.xAxis[0].setCategories((0, _sorting.sort)(data, type).map(function (t) {
+	    admissionLinerGraph.xAxis[0].setCategories(_.filter((0, _sorting.sort)(data, type), function (d) {
+	      return _.includes(uncheckBoxes, d.name);
+	    }).map(function (t) {
 	      return t.name.replace('คณะ', '');
 	    }));
 	  });
 	}
+
 	function inintializeStats() {
 	  (0, _backendRecieve.getGraduateStats)().then(function (data) {
 	    inintializeGraph(data);
+	    initSelectCheckBox();
 	    inintializeHandler();
 	  });
 	}
@@ -4052,9 +4125,7 @@
 	function getGraduateStats(GRAD) {
 	  GRAD = GRAD || 'GRAD1';
 	  return new Promise(function (resolve, reject) {
-	    $.get('api/getGraduateStats/' + GRAD, function (data) {
-	      console.log(data);
-	    }).done(function (data) {
+	    $.get('api/getGraduateStats/' + GRAD, function (data) {}).done(function (data) {
 	      resolve(data);
 	    }).fail(function (err) {
 	      reject(err);
@@ -4064,6 +4135,53 @@
 
 /***/ },
 /* 41 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.createCheckboxList = createCheckboxList;
+	var index = 0;
+	function createItem(item) {
+	  var theItem = '<li id=' + item + '>' + '<input type="checkbox" class="filled-in" id=' + index + ' checked="checked" />' + '<label for=' + index + '>' + item + '</label>' + '</li>';
+	  index++;
+	  return theItem;
+	}
+	function createCheckboxList(items) {
+	  var list = '';
+	  var _iteratorNormalCompletion = true;
+	  var _didIteratorError = false;
+	  var _iteratorError = undefined;
+
+	  try {
+	    for (var _iterator = items[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+	      var item = _step.value;
+
+
+	      list = list + createItem(item);
+	    }
+	  } catch (err) {
+	    _didIteratorError = true;
+	    _iteratorError = err;
+	  } finally {
+	    try {
+	      if (!_iteratorNormalCompletion && _iterator.return) {
+	        _iterator.return();
+	      }
+	    } finally {
+	      if (_didIteratorError) {
+	        throw _iteratorError;
+	      }
+	    }
+	  }
+
+	  return list;
+	}
+
+/***/ },
+/* 42 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(module, global) {/**
@@ -20216,10 +20334,10 @@
 	  }
 	}.call(this));
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(42)(module), (function() { return this; }())))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(43)(module), (function() { return this; }())))
 
 /***/ },
-/* 42 */
+/* 43 */
 /***/ function(module, exports) {
 
 	module.exports = function(module) {
@@ -20235,7 +20353,7 @@
 
 
 /***/ },
-/* 43 */
+/* 44 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
