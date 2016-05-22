@@ -1,8 +1,8 @@
 
 //import { setHighchartsTheme } from '../javascripts/graphs/theme.js'
 
-// const Highcharts = require('highcharts/highstock')
-// require('highcharts/modules/exporting')(Highcharts)
+  // const Highcharts = require('highcharts/highstock')
+  // require('highcharts/modules/exporting')(Highcharts)
 
 export function inintializeGraph() {
 

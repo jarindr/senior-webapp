@@ -22,6 +22,8 @@
     "jquery-knob": "^1.2.13"
   },
   "devDependencies": {
-    "highcharts": "^4.2.5"
+    "highcharts": "^4.2.5",
+    "select2": "^4.0.2",
+    "jquery-ui": "^1.11.4"
   }
 }

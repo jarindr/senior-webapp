@@ -21,3 +21,8 @@ margin: 0 auto;
 .circles-text-student{
 
 }
+#map{
+  width: 100%;
+  margin-top: 70px;
+  height: 85vh;
+}

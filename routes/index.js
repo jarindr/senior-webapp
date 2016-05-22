@@ -39,10 +39,17 @@ router.get('/main', function(req, res, next) {
   })
 })
 router.get('/graduateStatistic', function(req, res, next) {
-  res.render('statsVisualization')
+  res.render('graduateStatistic')
 })
 
 router.get('/foreignersStatistic',function (req,res,next) {
   res.render('foreignersStatistic')
+})
+router.get('/population',function (req,res,next) {
+  res.render('population')
+})
+
+router.get('/gradeStatistic',function (req,res,next) {
+  res.render('gradeStatistic')
 })
 module.exports = router;

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<% include head-tag %>
+
+<body>
+  <div class = "app">
+    <div class='stat-component'>
+      <%include _navbar%>
+      <div class='stat-content'>
+        <div class='controller'><i class="fa fa-bars" aria-hidden="true"></i></div>
+        <div class='row' style="padding-left:3%;">
+
+          <!-- start controller display -->
+          <div class='col s3 control-display'>
+            <div class='general-number-graph-header'>
+              Percentage of
+              <!-- <br><span class='type-selected-graph'></span><br> -->
+              in faculties 2015
+            </div>
+            <select class="browser-default select-query-honor" id='year-selection'>
+              <option value="55">2012</option>
+              <option value="58">2015</option>
+            </select>
+            <button class='btn' id='switcher' style='float:right; margin-top:10px;'>switch to bar graph</button>
+          </div>
+          <!-- end controller display -->
+          <div class='col s9' id="general-number-graph-container">
+            <div id='map' style='display:none'>
+            </div>
+            <div id='general-number-graph'>
+            </div>
+          </div>
+        </div>
+        <%include _footer%>
+      </div>
+      <style>
+      .footer{
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+      }
+      </style>
+    </div>
+  </div>
+</div>
+
+<!-- start vendors -->
+<script type="text/javascript" src="../public/javascripts/graphs/circle.js" charset="utf-8"></script>
+<script type="text/javascript" src="../bower_components/jquery/dist/jquery.js" charset="utf-8"></script>
+<script type="text/javascript" src="../bower_components/materialize/dist/js/materialize.js" charset="utf-8"></script>
+<script type="text/javascript" src="../bower_components/highcharts/highmaps.js" charset="utf-8"></script>
+<script src="https://code.highcharts.com/mapdata/countries/th/th-all.js"></script>
+
+<!-- end vendors -->
+<script type="text/javascript" src="./build/js/bundle.js" charset="utf-8"></script>
+
+
+</body>
+</html>

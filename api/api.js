@@ -3,11 +3,92 @@ var router = express.Router()
 
 const facultyStatisticCollection    = require('../database/connection.js').facultyStatistic
 const foreignersStatisticCollection = require('../database/connection.js').foreignersStatistic
+const gradeStatisticCollection      = require('../database/connection.js').gradeStatistic
+const bioStatisticCollection        = require('../database/connection.js').bioStatistic
 const _                             = require('lodash')
 
 const colors =   ["#4db6ac", "#4dd0e1", "#ab47bc", "#7e57c2", "#7986cb", "#42a5f5", "#4fc3f7",
 "#b2ebf2", "#1de9b6", "#7798BF", "#d4e157",'#f57f17','#ffa726','#ff7043','#8d6e63','#9e9e9e','#78909c']
 
+
+router.get('/getGradeStats/:subject/:sortType',function (req,res,next) {
+  var options = [
+    {
+      $match:{
+        NAMEENGLISHABBR:req.params.subject
+      }
+    },
+    {
+      $group: {
+        _id:'$ACADYEAR',
+        year:{$push:'$ACADYEAR'},
+        name:{$push:'$NAMEENGLISHABBR'},
+        grade:{$avg:'$AVG_GPA'}
+      }
+    },
+    {
+      $sort : {
+        year : req.params.sortType == 'asc' ? 1:-1
+      }
+    }
+
+  ]
+  gradeStatisticCollection.aggregate(options,function (err,agData) {
+    res.send(agData)
+  })
+})
+
+router.get('/getAllBioStats/:year',function (req,res,next) {
+
+  var options = [
+    {
+      $project:{
+        YEARCODE: { $substr: [ "$STUDENTCODE", 0, 2 ] },
+        JW:"$PRESENTCHANGWAD"
+      }
+    },
+    {
+      $match:{
+        YEARCODE:req.params.year
+
+      }
+    },
+    {
+      $group:{
+        _id:'$JW',
+        count:{$sum:1}
+      }
+    },
+    {
+      $sort : {
+        count : 1
+      }
+    }
+
+  ]
+  bioStatisticCollection.aggregate(options,function (err,agData) {
+    res.send(agData)
+  })
+})
+
+
+router.get('/getAllGradeStats',function (req,res,next) {
+  var options = [
+    {
+      $group: {
+        _id:'$NAMEENGLISHABBR'
+      }
+    },
+    {
+      $sort : {
+        name : 1
+      }
+    }
+  ]
+  gradeStatisticCollection.aggregate(options,function (err,agData) {
+    res.send(agData)
+  })
+})
 
 router.get('/getGraduateStats/:GRAD',function (req,res,next) {
 
@@ -179,7 +260,6 @@ router.get('/getNumberStats/:faculty',function (req,res,next) {
         let temp = []
         for(key in d){
           if(d.hasOwnProperty(key)&&d[key]!=0){
-            console.log(d.name[0])
             temp.push({fac:d.name[0],name:key,y:d[key]})
           }
         }

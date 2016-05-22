@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<% include head-tag %>
+<style>
+.footer{
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+.ui-autocomplete {
+  max-height:200px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  font-size: 12px;
+}
+
+.ui-widget-content li{
+  color:black;
+  background-color: #ECEFF1;
+  border-bottom: 1px solid #CFD8DC;
+}
+#tags{
+  color : transparent;
+  text-shadow : 0 0 0 white;
+}
+
+</style>
+<body>
+  <div class = "app">
+    <div class='stat-component'>
+      <%include _navbar%>
+      <div class='stat-content'>
+        <div class='controller'><i class="fa fa-bars" aria-hidden="true"></i></div>
+        <div class='row' style="padding-left:3%;">
+
+          <!-- start controller display -->
+          <div class='col s3 control-display'>
+            <div class='general-number-graph-header'>
+              Subject<br><span class='type-selected-graph' style='font-size:30px; color:#CFD8DC;'></span><br>
+              in each year<br>
+              <span class='avg-grade'></span>
+            </div>
+
+            <div class="search-box" style="color:white;">
+              <label for="tags">Search your subject: </label>
+              <input id="tags" >
+            </div>
+            <form action="#" style="float:right;">
+              <p>
+                <input class='with-gap' name="group1" type="radio" id="asc" checked/>
+                <label for="asc" style='margin-right:10px;'>Ascendent</label>
+                <input class='with-gap' name="group1" type="radio" id="dsc" />
+                <label for="dsc">Descendent</label>
+              </p>
+            </form>
+          </div>
+          <!-- end controller display -->
+
+          <div class='col s9' id="general-number-graph-container">
+            <div id='general-number-graph'>
+            </div>
+          </div>
+        </div>
+      </div>
+      <%include _footer%>
+    </div>
+  </div>
+</div>
+
+<!-- start vendors -->
+<script type="text/javascript" src="../public/javascripts/graphs/circle.js" charset="utf-8"></script>
+<script type="text/javascript" src="../bower_components/jquery/dist/jquery.js" charset="utf-8"></script>
+<script type="text/javascript" src="../bower_components/materialize/dist/js/materialize.js" charset="utf-8"></script>
+<script type="text/javascript" src="../bower_components/jquery-ui/jquery-ui.js" charset="utf-8"></script>
+<script type="text/javascript" src="../bower_components/highcharts/highstock.js" charset="utf-8"></script>
+<!-- end vendors -->
+<script type="text/javascript" src="./build/js/bundle.js" charset="utf-8"></script>
+
+
+</body>
+</html>

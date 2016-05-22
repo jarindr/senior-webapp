@@ -1,13 +1,7 @@
 <!DOCTYPE html>
 <html>
 <% include head-tag %>
-<style>
-.footer{
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-}
-</style>
+
 <body>
   <div class = "app">
     <div class='stat-component'>
@@ -23,7 +17,7 @@
               <!-- <br><span class='type-selected-graph'></span><br> -->
               in faculties 2015
             </div>
-
+            
             <select class="browser-default select-query-honor">
             </select>
 
@@ -54,6 +48,13 @@
         </div>
       </div>
       <%include _footer%>
+      <style>
+      .footer{
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+      }
+      </style>
     </div>
   </div>
 </div>
@@ -62,10 +63,10 @@
 <script type="text/javascript" src="../public/javascripts/graphs/circle.js" charset="utf-8"></script>
 <script type="text/javascript" src="../bower_components/jquery/dist/jquery.js" charset="utf-8"></script>
 <script type="text/javascript" src="../bower_components/materialize/dist/js/materialize.js" charset="utf-8"></script>
+<script type="text/javascript" src="../bower_components/highcharts/highstock.js" charset="utf-8"></script>
 
-<script src="./bower_components/highcharts/highstock.js"></script>
 <!-- end vendors -->
-<script src="./bower_components/highcharts/modules/drilldown.js"></script>
+
 
 <script type="text/javascript" src="./build/js/bundle.js" charset="utf-8"></script>
 

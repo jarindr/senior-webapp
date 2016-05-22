@@ -3,8 +3,10 @@ import { changeState }                         from '../helpers/history'
 import {inintializeGraph }                     from '../graph.js'
 import { inintializeParticle }                 from '../particle.js'
 import { inintializeMain }                     from '../main.js'
-import { inintializeStats }                    from '../graphStatsVisualization.js'
+import { inintializeStats }                    from '../graphGraduateStatistic.js'
 import { inintializeGraphForeignersStatistic } from '../graphForeignersStatistic.js'
+import { inintializeGrade }                    from '../gradeStats.js'
+import { inintializePopulation }               from '../graphPopulation.js'
 
 const app = $('.app')
 
@@ -20,18 +22,36 @@ export function getRouteActionsPush (location) {
 
     case "/main":
     app.load('main .main-component',()=>{
-      console.log('yo')
+      $('body').css({overflow:'auto'})
       inintializeGraph()
       inintializeMain()
     })
     break
 
     case "/graduateStatistic":
-    app.load('statsVisualization .stats-component',()=>{
+    app.load('graduateStatistic .stat-component',()=>{
       inintializeStats()
     })
-
     break
+
+    case "/foreignersStatistic":
+    app.load('foreignersStatistic .stat-component',()=>{
+      inintializeGraphForeignersStatistic()
+    })
+    break
+
+    case "/population":
+    app.load('population .stat-component',()=>{
+      inintializePopulation()
+    })
+    break
+
+    case "/gradeStatistic":
+    app.load('gradeStatistic .stat-component',()=>{
+    inintializeGrade()
+    })
+    break
+
     case '/dashboard':
     app.load('dashboard .home',()=>{
 
@@ -70,22 +90,34 @@ export function getRouteActionsPop (location) {
       inintializeParticle('particle')
       $('.signin-component').slideDown()
       $('#login').text('Login')
+      $('body').css({overflow:'hidden'})
     })
     break
 
     case "/main":
-
-    inintializeGraph()
-    inintializeMain()
+    app.load('main .main-component',()=>{
+      $('body').css({overflow:'auto'})
+      inintializeGraph()
+      inintializeMain()
+    })
     break
 
     case "/graduateStatistic":
-    inintializeStats()
+    app.load('graduateStatistic .stat-component',()=>{
+      inintializeStats()
+    })
     break
 
     case "/foreignersStatistic":
-
     inintializeGraphForeignersStatistic()
+    break
+
+    case "/population":
+    inintializePopulation()
+    break
+
+    case "/gradeStatistic":
+    inintializeGrade()
     break
   }
 }

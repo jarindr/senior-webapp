@@ -48,9 +48,11 @@
 
 	__webpack_require__(1);
 
-	__webpack_require__(42);
+	__webpack_require__(45);
 
 	__webpack_require__(34);
+
+	__webpack_require__(46);
 
 /***/ },
 /* 1 */
@@ -2509,9 +2511,13 @@
 
 	var _main = __webpack_require__(34);
 
-	var _graphStatsVisualization = __webpack_require__(35);
+	var _graphGraduateStatistic = __webpack_require__(35);
 
 	var _graphForeignersStatistic = __webpack_require__(41);
+
+	var _gradeStats = __webpack_require__(42);
+
+	var _graphPopulation = __webpack_require__(43);
 
 	var app = $('.app');
 
@@ -2527,18 +2533,36 @@
 
 	    case "/main":
 	      app.load('main .main-component', function () {
-	        console.log('yo');
+	        $('body').css({ overflow: 'auto' });
 	        (0, _graph.inintializeGraph)();
 	        (0, _main.inintializeMain)();
 	      });
 	      break;
 
 	    case "/graduateStatistic":
-	      app.load('statsVisualization .stats-component', function () {
-	        (0, _graphStatsVisualization.inintializeStats)();
+	      app.load('graduateStatistic .stat-component', function () {
+	        (0, _graphGraduateStatistic.inintializeStats)();
 	      });
-
 	      break;
+
+	    case "/foreignersStatistic":
+	      app.load('foreignersStatistic .stat-component', function () {
+	        (0, _graphForeignersStatistic.inintializeGraphForeignersStatistic)();
+	      });
+	      break;
+
+	    case "/population":
+	      app.load('population .stat-component', function () {
+	        (0, _graphPopulation.inintializePopulation)();
+	      });
+	      break;
+
+	    case "/gradeStatistic":
+	      app.load('gradeStatistic .stat-component', function () {
+	        (0, _gradeStats.inintializeGrade)();
+	      });
+	      break;
+
 	    case '/dashboard':
 	      app.load('dashboard .home', function () {});
 	      break;
@@ -2569,22 +2593,34 @@
 	        (0, _particle.inintializeParticle)('particle');
 	        $('.signin-component').slideDown();
 	        $('#login').text('Login');
+	        $('body').css({ overflow: 'hidden' });
 	      });
 	      break;
 
 	    case "/main":
-
-	      (0, _graph.inintializeGraph)();
-	      (0, _main.inintializeMain)();
+	      app.load('main .main-component', function () {
+	        $('body').css({ overflow: 'auto' });
+	        (0, _graph.inintializeGraph)();
+	        (0, _main.inintializeMain)();
+	      });
 	      break;
 
 	    case "/graduateStatistic":
-	      (0, _graphStatsVisualization.inintializeStats)();
+	      app.load('graduateStatistic .stat-component', function () {
+	        (0, _graphGraduateStatistic.inintializeStats)();
+	      });
 	      break;
 
 	    case "/foreignersStatistic":
-
 	      (0, _graphForeignersStatistic.inintializeGraphForeignersStatistic)();
+	      break;
+
+	    case "/population":
+	      (0, _graphPopulation.inintializePopulation)();
+	      break;
+
+	    case "/gradeStatistic":
+	      (0, _gradeStats.inintializeGrade)();
 	      break;
 	  }
 	}
@@ -3295,7 +3331,7 @@
 	}
 
 	function inintializeHandler() {
-	  $(document).mouseup(function (e) {
+	  $(document).off('a').mouseup(function a(e) {
 	    var container = $(".checkbox-list-container");
 	    var button = $('#controller');
 
@@ -3318,7 +3354,7 @@
 	  $('#dsc').click(function () {
 	    changeSort('dsc');
 	  });
-	  $('#controller').click(function (e) {
+	  $('#controller').off().click(function (e) {
 	    $('.checkbox-list-container').slideToggle();
 	  });
 
@@ -3448,6 +3484,9 @@
 	});
 	exports.getGraduateStats = getGraduateStats;
 	exports.getForeignersStats = getForeignersStats;
+	exports.getGradeStats = getGradeStats;
+	exports.getAllBioStats = getAllBioStats;
+	exports.getAllGradeStats = getAllGradeStats;
 	function getGraduateStats(GRAD) {
 	  GRAD = GRAD || 'GRAD1';
 	  return new Promise(function (resolve, reject) {
@@ -3460,11 +3499,39 @@
 	}
 
 	function getForeignersStats() {
-
 	  return new Promise(function (resolve, reject) {
 	    $.get('api/getNumberStats/facs', function (data) {}).done(function (data) {
 	      resolve(data);
 	    }).fail(function (err) {
+	      reject(err);
+	    });
+	  });
+	}
+
+	function getGradeStats(subject, sortType) {
+	  return new Promise(function (resolve, reject) {
+	    $.get('api/getGradeStats/' + subject + '/' + sortType, function (data) {}).done(function (data) {
+	      resolve(data);
+	    }).fail(function (err) {
+	      reject(err);
+	    });
+	  });
+	}
+	function getAllBioStats(year) {
+	  return new Promise(function (resolve, reject) {
+	    $.get('api/getAllBioStats/' + year, function (data) {}).done(function (data) {
+	      resolve(data);
+	    }).fail(function (err) {
+	      reject(err);
+	    });
+	  });
+	}
+	function getAllGradeStats() {
+	  return new Promise(function (resolve, reject) {
+	    $.get('api/getAllGradeStats', function (data) {}).done(function (data) {
+	      resolve(data);
+	    }).fail(function (err) {
+
 	      reject(err);
 	    });
 	  });
@@ -19712,8 +19779,8 @@
 
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
-	//const Highcharts = require('highcharts/highstock')
-	//require('highcharts/modules/exporting')(Highcharts)
+	// const Highcharts = require('highcharts/highstock')
+	// require('highcharts/modules/exporting')(Highcharts)
 	//setHighchartsTheme(Highcharts)
 
 	//import { setHighchartsTheme } from '../javascripts/graphs/theme.js'
@@ -19821,7 +19888,7 @@
 	}
 
 	function inintializeHandler() {
-	  $(document).mouseup(function (e) {
+	  $(document).off('a').mouseup(function a(e) {
 	    var container = $(".checkbox-list-container");
 	    var button = $('#controller');
 
@@ -19960,6 +20027,660 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
+	//import { setHighchartsTheme } from '../javascripts/graphs/theme.js'
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.inintializeGrade = inintializeGrade;
+
+	var _sorting = __webpack_require__(36);
+
+	var _backendRecieve = __webpack_require__(37);
+
+	var _selectCheckbox = __webpack_require__(38);
+
+	var _lodash = __webpack_require__(39);
+
+	var _ = _interopRequireWildcard(_lodash);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+	// const Highcharts = require('highcharts/highstock')
+	// require('highcharts/modules/exporting')(Highcharts)
+	//setHighchartsTheme(Highcharts)
+	var gradeGraph = null;
+	var selected = 'FIN ANAL CONT SYS';
+
+	function inintializeGraph(data) {
+	  gradeGraph = Highcharts.chart({
+	    // shuold i even shuffle the color
+	    colors: ["#b2ebf2", "#4dd0e1", "#ab47bc", "#7e57c2", "#7986cb", "#42a5f5", "#4fc3f7", "#b2ebf2", "#1de9b6", "#7798BF", "#d4e157", '#f57f17', '#ffa726', '#ff7043', '#8d6e63', '#9e9e9e', '#78909c'],
+
+	    chart: {
+	      type: 'line',
+	      renderTo: 'general-number-graph',
+	      backgroundColor: 'transparent',
+	      zoomType: 'x',
+	      events: {
+	        load: function load() {}
+	      }
+	    },
+	    credits: {
+	      enabled: false
+	    },
+	    exporting: {
+	      enabled: false
+	    },
+	    xAxis: {
+	      title: {},
+	      categories: data.map(function (t) {
+	        return t.year[0];
+	      }),
+	      labels: {
+	        style: {
+	          color: 'white',
+	          fontSize: 13
+	        }
+	      }
+
+	    },
+	    yAxis: {
+	      max: 4.0,
+	      labels: {}
+	    },
+	    title: {
+	      text: null
+	    },
+	    plotOptions: {
+	      series: {
+	        dataLabels: {
+	          enabled: true,
+	          style: {
+	            textShadow: 'none',
+	            color: 'white'
+	          }
+	        }
+	      }
+	    },
+	    tooltip: {},
+	    legend: {
+	      enabled: false,
+	      align: 'right',
+	      itemStyle: {
+	        fontSize: 10,
+	        color: 'white'
+	      }
+	    },
+	    series: [{
+	      name: data[0].name[0],
+	      data: data.map(function (t) {
+	        return {
+	          name: t.name[0],
+	          y: parseFloat(t.grade.toFixed(2)),
+	          color: 'white'
+	        };
+	      })
+	    }]
+	  });
+	}
+
+	function setGraphData(data) {
+	  gradeGraph.series[0].setData(data.map(function (t) {
+	    return {
+	      name: t.name[0],
+	      y: parseFloat(t.grade.toFixed(2)),
+	      color: 'white'
+	    };
+	  }));
+	  gradeGraph.xAxis[0].setCategories(data.map(function (t) {
+	    return t.year[0];
+	  }));
+	  $('.type-selected-graph').text(selected);
+	  $('.avg-grade').text('average: ' + _.mean(data.map(function (d) {
+	    return d.grade;
+	  })).toFixed(2));
+	}
+
+	function getSortType() {
+	  var temp = '';
+	  $('.with-gap').each(function () {
+	    if ($(this).prop('checked')) {
+	      temp = $(this).prop('id');
+	    }
+	  });
+	  return temp;
+	}
+	function inintializeHandler(data) {
+	  $('.type-selected-graph').text(selected);
+	  var $tag = $('#tags');
+	  $tag.autocomplete({
+	    autoFocus: true,
+	    source: data.map(function (d) {
+	      return d._id;
+	    }),
+	    select: function select(event, ui) {
+	      $tag.blur();
+	      selected = ui.item.label;
+	      (0, _backendRecieve.getGradeStats)(selected, getSortType()).then(function (data) {
+	        return setGraphData(data);
+	      });
+	    }
+	  }).val(selected).data('autocomplete');
+
+	  $('#asc').click(function () {
+	    changeSort();
+	  });
+	  $('#dsc').click(function () {
+	    changeSort();
+	  });
+	}
+	function changeSort() {
+	  (0, _backendRecieve.getGradeStats)(selected, getSortType()).then(function (data) {
+	    return setGraphData(data);
+	  });
+	}
+
+	function inintializeGrade() {
+	  (0, _backendRecieve.getAllGradeStats)().then(function (data) {
+	    inintializeHandler(data);
+	  });
+
+	  (0, _backendRecieve.getGradeStats)(selected, getSortType()).then(function (data) {
+	    $('.avg-grade').text('average: ' + _.mean(data.map(function (d) {
+	      return d.grade;
+	    })).toFixed(2));
+	    inintializeGraph(data);
+	  });
+	}
+
+/***/ },
+/* 43 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.inintializePopulation = inintializePopulation;
+
+	var _lodash = __webpack_require__(39);
+
+	var _ = _interopRequireWildcard(_lodash);
+
+	var _backendRecieve = __webpack_require__(37);
+
+	var _graphVal = __webpack_require__(44);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+	// const Highcharts = require('highcharts/highstock')
+	// require('highcharts/modules/exporting')(Highcharts)
+
+	//setHighchartsTheme(Highcharts)
+
+
+	var mapGraph = null;
+	//import { setHighchartsTheme } from '../javascripts/graphs/theme.js'
+
+	var barGraph = null;
+	function inintializeGraph(data) {
+
+	  // Initiate the chart
+	  mapGraph = new Highcharts.Map({
+	    chart: {
+	      backgroundColor: 'transparent',
+	      renderTo: 'map'
+	    },
+	    credits: {
+	      enabled: false
+	    },
+	    exporting: {
+	      enabled: false
+	    },
+	    title: {
+	      text: null
+	    },
+
+	    colorAxis: {
+	      type: 'logarithmic',
+	      dataClasses: [{
+	        to: 5
+	      }, {
+	        from: 5,
+	        to: 20
+	      }, {
+	        from: 20,
+	        to: 100
+	      }, {
+	        from: 100
+	      }],
+	      minColor: '#E3F2FD',
+	      maxColor: '#1565C0'
+	    },
+	    mapNavigation: {
+	      enabled: true,
+	      buttonOptions: {
+	        verticalAlign: 'bottom',
+	        align: 'right'
+	      }
+	    },
+
+	    series: [{
+	      data: data.map(function (d) {
+	        return {
+	          'hc-key': (0, _graphVal.toProvinceCode)(d._id),
+	          'value': d.count
+	        };
+	      }),
+	      mapData: Highcharts.maps['countries/th/th-all'],
+	      joinBy: 'hc-key',
+	      name: 'Provice',
+	      states: {
+	        hover: {
+	          color: '#BADA55'
+	        }
+	      },
+	      dataLabels: {
+	        enabled: true,
+	        format: '{point.name}'
+	      }
+	    }]
+	  });
+	}
+
+	function inintializeGraphBar(data) {
+	  barGraph = Highcharts.chart({
+	    // shuold i even shuffle the color
+	    colors: ["#4db6ac", "#4dd0e1", "#ab47bc", "#7e57c2", "#7986cb", "#42a5f5", "#4fc3f7", "#b2ebf2", "#1de9b6", "#7798BF", "#d4e157", '#f57f17', '#ffa726', '#ff7043', '#8d6e63', '#9e9e9e', '#78909c'],
+
+	    chart: {
+	      type: 'column',
+	      renderTo: 'general-number-graph',
+	      backgroundColor: 'transparent',
+	      zoomType: 'x',
+	      events: {
+	        load: function load() {}
+	      }
+	    },
+	    credits: {
+	      enabled: false
+	    },
+	    exporting: {
+	      enabled: false
+	    },
+	    xAxis: {
+	      title: {},
+	      categories: data.map(function (t) {
+	        return t._id.replace('คณะ', '');
+	      }),
+	      labels: {
+	        style: {
+	          color: 'white',
+	          fontSize: 13
+	        }
+	      }
+
+	    },
+	    yAxis: {
+	      visible: true,
+	      title: {
+	        text: null
+	      },
+	      labels: {
+	        style: {
+	          color: 'white'
+	        }
+	      }
+	    },
+	    title: {
+	      text: null
+	    },
+	    plotOptions: {
+	      pie: {
+	        allowPointSelect: true,
+	        cursor: 'pointer',
+	        dataLabels: {
+	          enabled: true,
+	          style: {
+	            color: 'black',
+	            fontSize: 15
+	          }
+	        },
+	        showInLegend: true
+	      },
+	      column: {
+	        dataLabels: {
+	          enabled: true,
+	          style: {
+	            color: 'white',
+	            fontSize: 10,
+	            textShadow: false
+
+	          }
+	        },
+	        borderWidth: 1,
+	        borderColor: 'grey'
+	      },
+	      series: {
+	        color: 'white',
+	        turboThreshold: 0,
+	        pointPadding: 0.1,
+	        groupPadding: 0.1
+
+	      }
+	    },
+	    tooltip: {
+	      valueSuffix: ' %',
+	      formatter: function formatter() {
+	        return this.x + ': ' + (this.y * 10).toFixed(3);
+	      }
+	    },
+	    legend: {
+	      enabled: false,
+	      verticalAlign: 'left',
+	      layout: 'vertical',
+	      align: 'center',
+	      itemStyle: {
+	        fontSize: 13
+	      }
+	    },
+	    series: [{
+	      colorByPoint: true,
+	      data: data.map(function (t) {
+	        return t.count;
+	      })
+	    }]
+
+	  });
+	}
+	function setHandler() {
+	  $('#year-selection').on('change', function () {
+	    (0, _backendRecieve.getAllBioStats)($(this).val()).then(function (data) {
+	      mapGraph.series[0].setData(data.map(function (d) {
+	        return {
+	          'hc-key': (0, _graphVal.toProvinceCode)(d._id),
+	          'value': d.count
+	        };
+	      }));
+	      barGraph.series[0].setData(data.map(function (d) {
+	        return {
+	          y: d.count
+	        };
+	      }));
+	      barGraph.xAxis[0].setCategories(data.map(function (t) {
+	        return t._id;
+	      }));
+	    });
+	  });
+	  $('#switcher').click(function () {
+	    $('#map').toggle();
+	    $('#general-number-graph').toggle();
+	    mapGraph.reflow();
+	  });
+	}
+	function inintializePopulation() {
+	  setHandler();
+	  (0, _backendRecieve.getAllBioStats)('55').then(function (data) {
+	    inintializeGraph(data);
+	    inintializeGraphBar(data);
+	  });
+	}
+
+/***/ },
+/* 44 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.toProvinceCode = toProvinceCode;
+	function toProvinceCode(province) {
+	  switch (province) {
+	    case 'นครราชสีมา':
+	      return 'th-nr';
+	      break;
+	    case 'เชียงใหม่':
+	      return 'th-cm';
+	      break;
+	    case 'กาญจนบุรี':
+	      return 'th-kn';
+	      break;
+	    case 'ตาก':
+	      return 'th-tk';
+	      break;
+	    case 'อุบลราชธานี':
+	      return 'th-ur';
+	      break;
+	    case 'สุราษฎร์ธานี':
+	      return 'th-st';
+	      break;
+	    case 'ชัยภูมิ':
+	      return 'th-cy';
+	      break;
+	    case 'แม่ฮ่องสอน':
+	      return 'th-mh';
+	      break;
+	    case 'เพชรบูรณ์':
+	      return 'th-ph';
+	      break;
+	    case 'ลำปาง':
+	      return 'th-lg';
+	      break;
+	    case 'อุดรธานี':
+	      return 'th-un';
+	      break;
+	    case 'เชียงราย':
+	      return 'th-cr';
+	      break;
+	    case 'น่าน':
+	      return 'th-na';
+	      break;
+	    case 'เลย':
+	      return 'th-le';
+	      break;
+	    case 'ขอนแก่น':
+	      return 'th-kk';
+	      break;
+	    case 'พิษณุโลก':
+	      return 'th-ps';
+	      break;
+	    case 'บุรีรัมย์':
+	      return 'th-br';
+	      break;
+	    case 'นครศรีธรรมราช':
+	      return 'th-nt';
+	      break;
+	    case 'สกลนคร':
+	      return 'th-sn';
+	      break;
+	    case 'นครสวรรค์':
+	      return 'th-ns';
+	      break;
+	    case 'ศรีสะเกษ':
+	      return 'th-si';
+	      break;
+	    case 'กำแพงเพชร':
+	      return 'th-kp';
+	      break;
+	    case 'ร้อยเอ็ด':
+	      return 'th-re';
+	      break;
+	    case 'สุรินทร์':
+	      return 'th-su';
+	      break;
+	    case 'อุตรดิตถ์':
+	      return 'th-ud';
+	      break;
+	    case 'สงขลา':
+	      return 'th-sg';
+	      break;
+	    case 'สระแก้ว':
+	      return 'th-sk';
+	      break;
+	    case 'กาฬสินธุ์':
+	      return 'th-kl';
+	      break;
+	    case 'อุทัยธานี':
+	      return 'th-ut';
+	      break;
+	    case 'สุโขทัย':
+	      return 'th-so';
+	      break;
+	    case 'แพร่':
+	      return 'th-pr';
+	      break;
+	    case 'ประจวบคีรีขันธ์':
+	      return 'th-pk';
+	      break;
+	    case 'จันทบุรี':
+	      return 'th-ct';
+	      break;
+	    case 'พะเยา':
+	      return 'th-py';
+	      break;
+	    case 'เพชรบุรี':
+	      return 'th-pe';
+	      break;
+	    case 'ลพบุรี':
+	      return 'th-lb';
+	      break;
+	    case 'ชุมพร':
+	      break;
+	    case 'นครพนม':
+	      return 'th-nf';
+	      break;
+	    case 'สุพรรณบุรี':
+	      return 'th-sh';
+	      break;
+	    case 'ฉะเชิงเทรา':
+	      return 'th-cc';
+	      break;
+	    case 'มหาสารคาม':
+	      return 'th-ms';
+	      break;
+	    case 'ราชบุรี':
+	      return 'th-rt';
+	      break;
+	    case 'ตรัง':
+	      return 'th-tg';
+	      break;
+	    case 'ปราจีนบุรี':
+	      return 'th-pb';
+	      break;
+	    case 'กระบี่':
+	      return 'th-kr';
+	      break;
+	    case 'พิจิตร':
+	      return 'th-pc';
+	      break;
+	    case 'ยะลา':
+	      return 'th-yl';
+	      break;
+	    case 'ลำพูน':
+	      return 'th-ln';
+	      break;
+	    case 'นราธิวาส':
+	      return 'th-sw';
+	      break;
+	    case 'ชลบุรี':
+	      return 'th-cb';
+	      break;
+	    case 'มุกดาหาร':
+	      return 'th-md';
+	      break;
+	    case 'บึงกาฬ':
+	      return 'th-bk';
+	      break;
+	    case 'พังงา':
+	      return 'th-pg';
+	      break;
+	    case 'ยโสธร':
+	      return 'th-ys';
+	      break;
+	    case 'หนองบัวลำภู':
+	      return 'th-nb';
+	      break;
+	    case 'สระบุรี':
+	      return 'th-sr';
+	      break;
+	    case 'ระยอง':
+	      return 'th-ry';
+	      break;
+	    case 'พัทลุง':
+	      return 'th-pl';
+	      break;
+	    case 'ระนอง':
+	      return 'th-rn';
+	      break;
+	    case 'อำนาจเจริญ':
+	      return 'th-ac';
+	      break;
+	    case 'หนองคาย':
+	      return 'th-nk';
+	      break;
+	    case 'ตราด':
+	      return 'th-tt';
+	      break;
+	    case 'พระนครศรีอยุธยา':
+	      return 'th-pa';
+	      break;
+	    case 'สตูล':
+	      return 'th-sa';
+	      break;
+	    case 'ชัยนาท':
+	      return 'th-cn';
+	      break;
+	    case 'นครปฐม':
+	      return 'th-np';
+	      break;
+	    case 'นครนายก':
+	      return 'th-nn';
+	      break;
+	    case 'ปัตตานี':
+	      return 'th-pi';
+	      break;
+	    case 'กรุงเทพมหานคร':
+	      return 'th-bm';
+	      break;
+	    case 'ปทุมธานี':
+	      return 'th-pt';
+	      break;
+	    case 'สมุทรปราการ':
+	      return 'th-cp';
+	      break;
+	    case 'อ่างทอง':
+	      return 'th-at';
+	      break;
+	    case 'สมุทรสาคร':
+	      return 'th-ss';
+	      break;
+	    case 'สิงห์บุรี':
+	      return 'th-sb';
+	      break;
+	    case 'นนทบุรี':
+	      return 'th-no';
+	      break;
+	    case 'ภูเก็ต':
+	      return 'th-pu';
+	      break;
+	    case 'สมุทรสงคราม':
+	      return 'th-sm';
+	      break;
+	    default:
+	      return 'th-bm';
+
+	  }
+	}
+
+/***/ },
+/* 45 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
 
 	var _history = __webpack_require__(2);
 
@@ -20010,6 +20731,38 @@
 	    }, 500);
 	  });
 	});
+
+/***/ },
+/* 46 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.inintializeNavigation = inintializeNavigation;
+
+	var _history = __webpack_require__(2);
+
+	function inintializeNavigation() {
+	  $(document).on('click', '#facInfo', function () {
+	    (0, _history.changeState)({
+	      path: '/foreignersStatistic'
+	    });
+	  });
+	  $(document).on('click', '#mainInfo', function () {
+	    (0, _history.changeState)({
+	      path: '/main'
+	    });
+	  });
+	  $(document).on('click', '#forInfo', function () {
+	    (0, _history.changeState)({
+	      path: '/graduateStatistic'
+	    });
+	  });
+	}
+	inintializeNavigation();
 
 /***/ }
 /******/ ]);

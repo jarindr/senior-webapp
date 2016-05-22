@@ -4,8 +4,8 @@ import { sort } from '../javascripts/helpers/sorting.js'
 import { getGraduateStats,getForeignersStats } from '../javascripts/api/backendRecieve'
 import { createCheckboxList } from '../javascripts/component/selectCheckbox.js'
 import * as _ from 'lodash'
-//const Highcharts = require('highcharts/highstock')
-//require('highcharts/modules/exporting')(Highcharts)
+// const Highcharts = require('highcharts/highstock')
+// require('highcharts/modules/exporting')(Highcharts)
 //setHighchartsTheme(Highcharts)
 
 let admissionLinerGraph = null
@@ -122,7 +122,7 @@ function getSpecificData(data,id) {
 
 
 function inintializeHandler() {
-  $(document).mouseup(function (e){
+  $(document).off('a').mouseup(function a(e){
     const container = $(".checkbox-list-container")
     const button = $('#controller')
 
