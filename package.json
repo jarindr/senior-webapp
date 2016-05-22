@@ -27,6 +27,7 @@
     "highcharts": "^4.2.3",
     "jquery": "^2.2.2",
     "lodash": "^4.11.2",
+    "multer": "^1.1.0",
     "style-loader": "^0.13.0",
     "webpack": "^1.12.14",
     "webpack-stream": "^3.1.0"

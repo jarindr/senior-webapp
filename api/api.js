@@ -154,7 +154,7 @@ router.get('/getNumberStats/:faculty',function (req,res,next) {
         _id: '$FACCODE',
         name:{$push:'$DEGREETHAI'},
         totalN00:{$sum:'$N_00'},
-        totalN01:{$sum:'$N_01'},
+        Thailand:{$sum:'$N_01'},
         totalN02:{$sum:'$N_02'},
         totalN03:{$sum:'$N_03'},
         totalN04:{$sum:'$N_04'},

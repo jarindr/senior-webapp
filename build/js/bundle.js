@@ -2646,7 +2646,7 @@
 	  var studentCircleGraph = Circles.create({
 	    id: 'student-circle-graph',
 	    radius: 100,
-	    value: 87,
+	    value: 92,
 	    maxValue: 100,
 	    width: 25,
 	    text: function text(value) {
@@ -2696,7 +2696,7 @@
 	      enabled: false
 	    },
 	    xAxis: {
-	      categories: ['Assumption College', 'Suankularb College', 'Saint Gabriel College', 'Triamudom Suksa School', 'Bangkok Christian College']
+	      categories: ['Triamudom Suksa School', 'Suankularb College', 'Saint Gabriel College', 'Assumption College', 'Bangkok Christian College']
 	    },
 	    yAxis: {
 	      gridLineWidth: 0,
@@ -2814,16 +2814,16 @@
 
 	    series: [{
 	      data: [{
-	        color: '#bb1667',
+	        color: '#F3D1E2',
 	        y: 3.13
 	      }, {
 	        color: '#F3D1E2',
 	        y: 2.15
 	      }, {
 	        color: '#F3D1E2',
-	        y: 4.00
+	        y: 3.22
 	      }, {
-	        color: '#F3D1E2',
+	        color: '#bb1667',
 	        y: 3.5
 	      }, {
 	        color: '#F3D1E2',
@@ -20698,6 +20698,13 @@
 	  $(document).on('click', '#export', function () {
 	    (0, _history.changeState)({ path: '/dashboard/export' });
 	  });
+	  $(document).on('click', '#upload-csv', function () {
+	    $('#upl-btn').click();
+	  });
+	  $(document).on('change', '#upl-btn', function () {
+	    $('#upl').submit();
+	    alert('upload done');
+	  });
 	  $(document).on('click', '#show-import-manual', function () {
 	    $('#import-manual').css({
 	      'position': 'relative'
@@ -20759,6 +20766,16 @@
 	  $(document).on('click', '#forInfo', function () {
 	    (0, _history.changeState)({
 	      path: '/graduateStatistic'
+	    });
+	  });
+	  $(document).on('click', '#subInfo', function () {
+	    (0, _history.changeState)({
+	      path: '/gradeStatistic'
+	    });
+	  });
+	  $(document).on('click', '#bioInfo', function () {
+	    (0, _history.changeState)({
+	      path: '/population'
 	    });
 	  });
 	}

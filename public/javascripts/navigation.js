@@ -15,5 +15,15 @@ export function inintializeNavigation() {
       path:'/graduateStatistic'
     })
   })
+  $(document).on('click','#subInfo',function () {
+    changeState({
+      path:'/gradeStatistic'
+    })
+  })
+  $(document).on('click','#bioInfo',function () {
+    changeState({
+      path:'/population'
+    })
+  })
 }
 inintializeNavigation()

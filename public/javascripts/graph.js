@@ -9,7 +9,7 @@ export function inintializeGraph() {
   var studentCircleGraph = Circles.create({
     id:                  'student-circle-graph',
     radius:              100,
-    value:               87,
+    value:               92,
     maxValue:            100,
     width:               25,
     text:                function(value){return value + '%';},
@@ -59,7 +59,7 @@ export function inintializeGraph() {
       enabled: false
     },
     xAxis: {
-      categories:['Assumption College','Suankularb College','Saint Gabriel College','Triamudom Suksa School','Bangkok Christian College']
+      categories:['Triamudom Suksa School','Suankularb College','Saint Gabriel College','Assumption College','Bangkok Christian College']
     },
     yAxis: {
       gridLineWidth: 0,
@@ -180,7 +180,7 @@ export function inintializeGraph() {
 
     series: [{
       data: [{
-        color: '#bb1667',
+        color: '#F3D1E2',
         y: 3.13
       }, {
         color: '#F3D1E2',
@@ -188,10 +188,10 @@ export function inintializeGraph() {
       },
       {
         color: '#F3D1E2',
-        y: 4.00
+        y: 3.22
       },
       {
-        color: '#F3D1E2',
+        color: '#bb1667',
         y: 3.5
       },
       {
